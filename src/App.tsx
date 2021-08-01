@@ -2,6 +2,7 @@ import React from 'react';
 import { BrowserRouter as Router, Switch, Route } from 'react-router-dom';
 import icon from '../assets/icon.svg';
 import './App.global.css';
+import Setting from './pages/setting';
 
 const Hello = () => {
   return (
@@ -45,6 +46,7 @@ export default function App() {
     <Router>
       <Switch>
         <Route path="/" component={Hello} />
+        <Route path="/setting" component={Setting} />
       </Switch>
     </Router>
   );
