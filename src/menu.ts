@@ -4,11 +4,18 @@ import {
   shell,
   BrowserWindow,
   MenuItemConstructorOptions,
+  IpcRenderer,
 } from 'electron';
 
 interface DarwinMenuItemConstructorOptions extends MenuItemConstructorOptions {
   selector?: string;
   submenu?: DarwinMenuItemConstructorOptions[] | Menu;
+}
+
+declare global {
+  interface Window {
+    ipcRenderer: IpcRenderer;
+  }
 }
 
 export default class MenuBuilder {
