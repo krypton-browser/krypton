@@ -1,1 +1,1 @@
-export * as test from './test';
+export * as pong from './pong';
