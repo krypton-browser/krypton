@@ -11,10 +11,11 @@
 import 'core-js/stable';
 import 'regenerator-runtime/runtime';
 import path from 'path';
-import { app, BrowserWindow, shell, ipcMain } from 'electron';
+import { app, BrowserWindow, shell } from 'electron';
 import { autoUpdater } from 'electron-updater';
 import log from 'electron-log';
 import MenuBuilder from './menu';
+import './service/ipc';
 
 export default class AppUpdater {
   constructor() {
@@ -133,7 +134,7 @@ app.on('activate', () => {
   if (mainWindow === null) createWindow();
 });
 
-ipcMain.on('test', (event, arg) => {
-  console.log(arg.ping);
-  event.sender.send('test', { pong: 'world' });
-});
+// ipcMain.on('test', (event, arg) => {
+//   console.log(arg.ping);
+//   event.sender.send('test', { pong: 'world' });
+// });
