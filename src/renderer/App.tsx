@@ -9,8 +9,10 @@ const { ipcRenderer } = window;
 export default function App() {
   useEffect(() => {
     if (ipcRenderer) {
+      // eslint-disable-next-line no-console
       console.log('opened!');
       ipcRenderer.on('test', (_event, arg) => {
+        // eslint-disable-next-line no-console
         console.log(arg.pong);
       });
       ipcRenderer.send('test', { ping: 'hello' });
