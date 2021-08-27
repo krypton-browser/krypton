@@ -1,1 +1,1 @@
-export * as pong from './pong';
+export * as pong from './routers/pong';

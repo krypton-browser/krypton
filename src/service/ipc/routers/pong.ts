@@ -1,4 +1,4 @@
-import ipcHandler from './ipc';
+import ipcHandler from '../ipcHandler';
 
 export default class {
   @ipcHandler('test')
