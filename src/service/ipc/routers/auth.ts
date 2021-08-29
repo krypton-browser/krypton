@@ -1,4 +1,4 @@
-import { Channel, Route } from '../ipcHandler';
+import Channel from '../ipc';
 
 export default class {
   @Channel('test')
