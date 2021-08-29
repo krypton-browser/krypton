@@ -3,6 +3,7 @@ import { BrowserRouter as Router, Switch, Route } from 'react-router-dom';
 import './App.global.css';
 import Home from './pages/home';
 import Setting from './pages/setting';
+import channels from '../channels';
 
 const { ipcRenderer } = window;
 
@@ -11,11 +12,12 @@ export default function App() {
     if (ipcRenderer) {
       // eslint-disable-next-line no-console
       console.log('opened!');
-      ipcRenderer.on('test', (_event, arg) => {
+      console.log(channels.pong.test);
+      ipcRenderer.on(channels.pong.test, (_event, arg) => {
         // eslint-disable-next-line no-console
         console.log(arg.pong);
       });
-      ipcRenderer.send('test', { ping: 'hello' });
+      ipcRenderer.send(channels.pong.test, { ping: 'hello' });
     }
   }, []);
   return (
