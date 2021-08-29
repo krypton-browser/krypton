@@ -1,2 +1,2 @@
-export * as pong from './routers/pong';
-export * as auth from './routers/auth';
+export * as pong from './routes/pong';
+export * as auth from './routes/auth';
