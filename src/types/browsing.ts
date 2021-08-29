@@ -4,9 +4,12 @@ export type ITab = {
   stack: string[];
 };
 
-export interface IHistory {
+export interface IBookmark {
   id: string;
   url: string;
   title: string;
+}
+
+export interface IHistory extends IBookmark {
   datetime: string;
 }

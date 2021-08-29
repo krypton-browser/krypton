@@ -1,21 +1,19 @@
 /* eslint-disable  @typescript-eslint/no-explicit-any */
 
-import { IHistory, ITab } from '../../types/browsing';
+import { IBookmark, IHistory, ITab } from '../../types/browsing';
 import { ISetting } from '../../types/setting';
 
 export interface IBrowsingState {
   tabs: ITab[];
   currentTab: string;
   isPhishingSite: boolean;
-  addHistoryDone: boolean;
-  addHistoryLoading: boolean;
-  addHistoryError?: any;
   loadPhishingSiteCheckDone: boolean;
   loadPhishingSiteCheckLoading: boolean;
   loadPhishingSiteCheckError?: any;
 }
 
 export interface IAuthState {
+  key?: string | null;
   joinDone: boolean;
   joinLoading: boolean;
   joinError?: any;
@@ -29,21 +27,40 @@ export interface IAuthState {
 
 export interface ISettingState {
   setting: ISetting;
-  history: IHistory[];
-  themeImage?: string | null;
-  loadHistoryDone: boolean;
-  loadHistoryLoading: boolean;
-  loadHistoryError?: any;
-  removeHistoryDone: boolean;
-  removeHistoryLoading: boolean;
-  removeHistoryError?: any;
   setSettingDone: boolean;
   setSettingLoading: boolean;
   setSettingError?: any;
   loadSettingDone: boolean;
   loadSettingLoading: boolean;
   loadSettingError?: any;
+}
+
+export interface IDataState {
+  history: IHistory[];
+  bookmarks: IBookmark[];
+  themeImage?: string | null;
+  loadHistoryDone: boolean;
+  loadHistoryLoading: boolean;
+  loadHistoryError?: any;
+  addHistoryDone: boolean;
+  addHistoryLoading: boolean;
+  addHistoryError?: any;
+  removeHistoryDone: boolean;
+  removeHistoryLoading: boolean;
+  removeHistoryError?: any;
+  loadBookmarksDone: boolean;
+  loadBookmarksLoading: boolean;
+  loadBookmarksError?: any;
+  addBookmarksDone: boolean;
+  addBookmarksLoading: boolean;
+  addBookmarksError?: any;
+  removeBookmarksDone: boolean;
+  removeBookmarksLoading: boolean;
+  removeBookmarksError?: any;
   loadThemeImageDone: boolean;
   loadThemeImageLoading: boolean;
   loadThemeImageError?: any;
+  setThemeImageDone: boolean;
+  setThemeImageLoading: boolean;
+  setThemeImageError?: any;
 }

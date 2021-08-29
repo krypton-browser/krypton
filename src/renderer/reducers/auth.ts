@@ -2,7 +2,7 @@ import { createSlice } from '@reduxjs/toolkit';
 import { IAuthState } from '../types/reducers';
 import { join, login, reset } from '../actions/auth';
 
-export const initialState: IAuthState = {
+const initialState: IAuthState = {
   joinDone: false,
   joinLoading: false,
   joinError: null,
