@@ -70,8 +70,8 @@ const createWindow = async () => {
 
   mainWindow = new BrowserWindow({
     show: false,
-    width: 1024,
-    height: 728,
+    minWidth: 600,
+    minHeight: 500,
     icon: getAssetPath('icon.png'),
     webPreferences: {
       preload: path.join(__dirname, 'preload.js'),
@@ -79,6 +79,8 @@ const createWindow = async () => {
       webviewTag: true,
     },
   });
+
+  mainWindow.maximize();
 
   mainWindow.loadURL(`file://${__dirname}/index.html`);
 

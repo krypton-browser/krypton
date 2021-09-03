@@ -1,5 +1,6 @@
 import { ipcMain } from 'electron';
 
+/* eslint-disable  @typescript-eslint/no-explicit-any */
 export default function Channel(channel: string): any {
   return (target: any, propertyKey: string, descriptor: PropertyDescriptor) => {
     if (target[propertyKey] && typeof target[propertyKey] === 'function')
