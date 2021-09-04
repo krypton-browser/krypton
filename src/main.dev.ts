@@ -78,6 +78,7 @@ const createWindow = async () => {
       nodeIntegration: true,
       webviewTag: true,
     },
+    frame: false,
   });
 
   mainWindow.maximize();

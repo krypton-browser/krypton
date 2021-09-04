@@ -30,7 +30,6 @@ export default merge(baseConfig, {
   entry: [
     'core-js',
     'regenerator-runtime/runtime',
-    path.join(__dirname, '../../src/renderer/Layout.tsx'),
   ],
 
   output: {

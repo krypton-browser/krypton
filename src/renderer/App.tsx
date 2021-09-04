@@ -12,11 +12,6 @@ export default function App() {
   useEffect(() => {
     if (ipcRenderer) {
       console.log('opened!');
-      console.log(channels.pong.test);
-      ipcRenderer.on(channels.pong.test, (_event, arg) => {
-        console.log(arg.pong);
-      });
-      ipcRenderer.send(channels.pong.test, { ping: 'hello' });
     }
   }, []);
   return (
