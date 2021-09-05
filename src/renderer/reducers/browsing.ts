@@ -4,7 +4,7 @@ import { initialTab } from '../constants/browsing';
 import { loadPhishingSiteCheck } from '../actions/browsing';
 
 const initialState: IBrowsingState = {
-  tabs: [initialTab],
+  tabs: [initialTab()],
   currentTab: '',
   isPhishingSite: false,
   loadPhishingSiteCheckDone: false,
@@ -23,7 +23,7 @@ export const browsingSlice = createSlice({
       state.currentTab = payload.id;
     },
     addTab: (state) => {
-      const newTab = initialTab;
+      const newTab = initialTab();
       state.tabs = [...state.tabs, newTab];
       state.currentTab = newTab.id;
     },
@@ -31,6 +31,8 @@ export const browsingSlice = createSlice({
       const tabs = state.tabs.filter(({ id }) => id !== payload.id);
       state.tabs = tabs;
       if (payload.id === state.currentTab) {
+        // eslint-disable-next-line no-console
+        console.log(tabs[tabs.length - 1].id);
         state.currentTab = tabs[tabs.length - 1].id;
       }
     },
@@ -41,6 +43,7 @@ export const browsingSlice = createSlice({
         if (tab.id === state.currentTab) {
           const { id, point, stack } = tab;
           newTabs[newTabs.indexOf(tab)] = {
+            ...tab,
             id,
             point: 0,
             stack: [url, ...stack.slice(point)],

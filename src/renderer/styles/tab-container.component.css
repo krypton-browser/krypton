@@ -1,12 +1,30 @@
 .container {
+  width: auto;
   z-index: 1000;
   display: flex;
-  justify-content: space-between;
 }
 
 .frame_button_wrapper {
   display: flex;
 }
 
-.button {
+.add_tab_button {
+  width: 35px;
+  border: none;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background: none;
+  -webkit-user-select: auto;
+  user-select: auto;
+  -webkit-app-region: no-drag;
+  transition: 0.5s;
+  border-radius: 100%;
+}
+.add_tab_button:hover {
+  background: rgba(0, 0, 0, 0.12);
+}
+
+.add_tab_button .icon {
+  width: 14px;
 }

@@ -1,20 +1,33 @@
 .tab_item_wrapper {
   width: 100%;
-  max-width: 500px;
+  max-width: 100px;
   display: flex;
   align-items: center;
   padding: 0 10px;
-  border-top-right-radius: 5px;
-  border-top-left-radius: 5px;
-  background: #f1f2f3;
+  z-index: 1000;
+  -webkit-user-select: auto;
+  user-select: auto;
+  -webkit-app-region: no-drag;
+  cursor: default;
+}
+
+.tab_item_wrapper:hover > .delete_button {
+  opacity: 1;
 }
 
 .is_current {
-  background: #fff !important;
+  z-index: 1001;
+  background: #fff;
+}
+
+.is_not_current {
+  z-index: 1000;
+  background: #f1f2f3;
 }
 
 .favicon {
-  margin: 0 5px 0 0;
+  margin: 1px 10px 0 0;
+  width: 15px !important;
 }
 
 .title {
@@ -23,17 +36,21 @@
 }
 
 .delete_button {
-  width: 20px;
-  height: 20px;
+  width: 25px;
+  height: 25px;
   border-radius: 100%;
   border: none;
   background: none;
-  z-index: 1001;
+  z-index: 1005;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  opacity: 0;
 }
-
 .delete_button:hover {
-  background: #bebebe;
+  background: rgba(0, 0, 0, 0.05);
 }
 
-.clicked {
+.delete_button .icon {
+  width: 9px;
 }

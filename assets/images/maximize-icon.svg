@@ -1,1 +1,9 @@
-<svg id="레이어_1" data-name="레이어 1" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 19 15"><defs><style>.cls-1,.cls-2{fill:none;}.cls-2{stroke:#3d3d3d;stroke-width:2px;}</style></defs><g id="사각형_202" data-name="사각형 202"><rect class="cls-1" width="19" height="15"/><rect class="cls-2" x="1" y="1" width="17" height="13"/></g></svg>
+<svg id="레이어_1" data-name="레이어 1" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 19 15">
+  <defs>
+    <style>.cls-1{fill:none;}.cls-2{fill:#3d3d3d;}</style>
+  </defs>
+  <g id="사각형_202" data-name="사각형 202">
+    <rect class="cls-1" width="19" height="15"/>
+    <path class="cls-2" d="M19,15H0V0H19ZM2,13H17V2H2Z"/>
+  </g>
+</svg>

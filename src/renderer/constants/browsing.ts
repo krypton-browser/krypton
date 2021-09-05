@@ -1,21 +1,29 @@
 import { v4 } from 'uuid';
 import { IBookmark, IHistory, ITab } from '../../types/browsing';
 
-export const initialTab: ITab = {
-  id: v4(),
-  point: 0,
-  stack: ['/'],
-};
+export function initialTab(): ITab {
+  return {
+    id: v4(),
+    point: 0,
+    stack: ['/'],
+    title: '새 탭',
+    favicon: 'http://images.sinopoda.com/favicon.svg',
+  };
+}
 
-export const initialBookmark: IBookmark = {
-  id: v4(),
-  url: '',
-  title: '',
-};
+export function initialBookmark(): IBookmark {
+  return {
+    id: v4(),
+    url: '',
+    title: '',
+  };
+}
 
-export const initialHistory: IHistory = {
-  id: v4(),
-  url: '',
-  title: '',
-  datetime: new Date().toString(),
-};
+export function initialHistory(): IHistory {
+  return {
+    id: v4(),
+    url: '',
+    title: '',
+    datetime: new Date().toString(),
+  };
+}

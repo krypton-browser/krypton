@@ -29,7 +29,7 @@
   align-items: center;
 }
 .url_icon_wrapper:hover {
-  box-shadow: 0 0 5px 1px #686868;
+  box-shadow: 0 0 5px 1px rgba(0, 0, 0, 0.3);
 }
 
 .url_icon_wrapper .icon {

@@ -8,7 +8,7 @@ import styles from '../styles/frame.component.css';
 import ipcSender from '../utils/ipcSender';
 
 const Frame: React.FC = () => {
-  const [isMaximize, setIsMaximize] = useState<boolean>(false);
+  const [isMaximize, setIsMaximize] = useState<boolean>(true);
   const close = async (): Promise<void> => {
     await ipcSender(app.quit);
   };

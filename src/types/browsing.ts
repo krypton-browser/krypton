@@ -1,5 +1,7 @@
 export type ITab = {
   id: string;
+  title: string;
+  favicon: string;
   point: number;
   stack: string[];
 };

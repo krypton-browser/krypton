@@ -3,9 +3,8 @@
   justify-content: space-between;
   background: #ddd;
   height: 35px;
-  -webkit-user-select: none;
-  user-select: none;
   -webkit-app-region: drag;
+  z-index: -1;
 }
 
 .frame_button_wrapper {
@@ -13,7 +12,7 @@
 }
 
 .button {
-  background: none;
+  background: rgba(0, 0, 0, 0);
   border: none;
   height: 100%;
   width: 30px;
@@ -21,16 +20,18 @@
   display: flex;
   justify-content: center;
   align-items: center;
+  z-index: 1000;
+  -webkit-user-select: auto;
+  user-select: auto;
+  -webkit-app-region: no-drag;
 }
-
-.icon {
-  width: 12px;
-}
-
 .button:hover {
   background: rgba(0, 0, 0, 0.08);
 }
-
 .button:nth-child(3):hover {
   background: red;
+}
+
+.button .icon {
+  width: 12px;
 }
