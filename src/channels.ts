@@ -47,4 +47,11 @@ export const setting = {
   load: VALUE('SETTING', 'LOAD'),
 };
 
-export default { auth, browsing, data, setting };
+export const app = {
+  maximize: VALUE('APP', 'MAXIMIZE'),
+  unMaximize: VALUE('APP', 'UN_MAXIMIZE'),
+  minimize: VALUE('APP', 'MINIMIZE'),
+  quit: VALUE('APP', 'QUIT'),
+};
+
+export default { auth, browsing, data, setting, app };
