@@ -22,7 +22,7 @@
     "resolveJsonModule": true,
     "allowJs": true,
     "experimentalDecorators": true,
-    "typeRoots": ["./node_modules/@types", "./types"]
+    "typeRoots": ["./node_modules/@types", "./**/types"]
   },
   "exclude": [
     "test",

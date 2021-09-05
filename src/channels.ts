@@ -1,8 +1,8 @@
 // import { machineIdSync } from 'node-machine-id';
 // import { SHA256, SHA512 } from 'crypto-js';
 
-function value(channel: string) {
-  return channel;
+function VALUE(...channel: string[]) {
+  return channel.join('/');
   // return SHA512(channel + SHA256(machineIdSync()).toString()).toString();
 }
 
@@ -17,9 +17,25 @@ function hex() {
 
 export default {
   auth: {
-    login: value('auth.login'),
+    login: VALUE('AUTH', 'LOGIN'),
   },
-  pong: {
-    test: value('pong.test'),
+  browsing: {
+    load_phishing_site_check: VALUE('BROWSING', 'LOAD_PHISHING_SITE_CHECK'),
+  },
+  data: {
+    history: {
+      load: VALUE('DATA', 'HISTORY', 'LOAD'),
+      add: VALUE('DATA', 'HISTORY', 'ADD'),
+      remove: VALUE('DATA', 'HISTORY', 'REMOVE'),
+    },
+    bookmarks: {
+      load: VALUE('DATA', 'BOOKMARKS', 'LOAD'),
+      add: VALUE('DATA', 'BOOKMARKS', 'ADD'),
+      remove: VALUE('DATA', 'BOOKMARKS', 'REMOVE'),
+    },
+    themeImage: {
+      load: VALUE('DATA', 'THEMEIMAGE', 'LOAD'),
+      set: VALUE('DATA', 'THEMEIMAGE', 'SET'),
+    },
   },
 };
