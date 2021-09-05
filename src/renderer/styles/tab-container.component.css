@@ -1,0 +1,12 @@
+.container {
+  z-index: 1000;
+  display: flex;
+  justify-content: space-between;
+}
+
+.frame_button_wrapper {
+  display: flex;
+}
+
+.button {
+}

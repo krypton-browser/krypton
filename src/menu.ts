@@ -5,6 +5,7 @@ import {
   BrowserWindow,
   MenuItemConstructorOptions,
   IpcRenderer,
+  Remote,
 } from 'electron';
 
 interface DarwinMenuItemConstructorOptions extends MenuItemConstructorOptions {
@@ -15,6 +16,7 @@ interface DarwinMenuItemConstructorOptions extends MenuItemConstructorOptions {
 declare global {
   interface Window {
     ipcRenderer: IpcRenderer;
+    remote: Remote;
   }
 }
 

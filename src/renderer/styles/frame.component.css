@@ -1,0 +1,36 @@
+.frame_container {
+  display: flex;
+  justify-content: space-between;
+  background: #ddd;
+  height: 35px;
+  -webkit-user-select: none;
+  user-select: none;
+  -webkit-app-region: drag;
+}
+
+.frame_button_wrapper {
+  display: flex;
+}
+
+.button {
+  background: none;
+  border: none;
+  height: 100%;
+  width: 30px;
+  transition: 0.3s;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.icon {
+  width: 12px;
+}
+
+.button:hover {
+  background: rgba(0, 0, 0, 0.08);
+}
+
+.button:nth-child(3):hover {
+  background: red;
+}

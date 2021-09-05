@@ -78,6 +78,7 @@ const createWindow = async () => {
       nodeIntegration: true,
       webviewTag: true,
     },
+    frame: false,
   });
 
   mainWindow.maximize();
@@ -135,8 +136,3 @@ app.on('activate', () => {
   // dock icon is clicked and there are no other windows open.
   if (mainWindow === null) createWindow();
 });
-
-// ipcMain.on('test', (event, arg) => {
-//   console.log(arg.ping);
-//   event.sender.send('test', { pong: 'world' });
-// });

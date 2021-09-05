@@ -12,4 +12,5 @@
   bottom: -300px;
   left: -35%;
   z-index: -1;
+  pointer-events: none;
 }

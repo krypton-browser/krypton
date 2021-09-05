@@ -30,7 +30,42 @@ export const browsingSlice = createSlice({
     removeTab: (state, { payload }: PayloadAction<{ id: string }>) => {
       const tabs = state.tabs.filter(({ id }) => id !== payload.id);
       state.tabs = tabs;
-      state.currentTab = tabs[tabs.length - 1].id;
+      if (payload.id === state.currentTab) {
+        state.currentTab = tabs[tabs.length - 1].id;
+      }
+    },
+    addUrl: (state, { payload: { url } }: PayloadAction<{ url: string }>) => {
+      const newTabs = state.tabs;
+      // eslint-disable-next-line no-restricted-syntax
+      for (const tab of newTabs) {
+        if (tab.id === state.currentTab) {
+          const { id, point, stack } = tab;
+          newTabs[newTabs.indexOf(tab)] = {
+            id,
+            point: 0,
+            stack: [url, ...stack.slice(point)],
+          };
+          break;
+        }
+      }
+      state.tabs = newTabs;
+    },
+    moveSpace: (
+      state,
+      { payload: { mode } }: PayloadAction<{ mode: 'back' | 'forward' }>
+    ) => {
+      const newTabs = state.tabs;
+      // eslint-disable-next-line no-restricted-syntax
+      for (const tab of newTabs) {
+        if (tab.id === state.currentTab) {
+          newTabs[newTabs.indexOf(tab)] = {
+            ...tab,
+            point: tab.point + (mode === 'back' ? 1 : -1),
+          };
+          break;
+        }
+      }
+      state.tabs = newTabs;
     },
   },
   extraReducers: (builder) =>

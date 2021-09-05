@@ -1,0 +1,39 @@
+.tab_item_wrapper {
+  width: 100%;
+  max-width: 500px;
+  display: flex;
+  align-items: center;
+  padding: 0 10px;
+  border-top-right-radius: 5px;
+  border-top-left-radius: 5px;
+  background: #f1f2f3;
+}
+
+.is_current {
+  background: #fff !important;
+}
+
+.favicon {
+  margin: 0 5px 0 0;
+}
+
+.title {
+  font-size: 15px;
+  width: 50px;
+}
+
+.delete_button {
+  width: 20px;
+  height: 20px;
+  border-radius: 100%;
+  border: none;
+  background: none;
+  z-index: 1001;
+}
+
+.delete_button:hover {
+  background: #bebebe;
+}
+
+.clicked {
+}

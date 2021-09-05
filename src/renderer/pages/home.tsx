@@ -1,7 +1,5 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
-// eslint-disable-next-line @typescript-eslint/ban-ts-comment
-// @ts-ignore
 import styles from '../styles/home.page.css';
 
 import duckduckgoIcon from '../../../assets/images/duckduckgo_normal.svg';

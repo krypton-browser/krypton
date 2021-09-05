@@ -1,7 +1,5 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
-// eslint-disable-next-line @typescript-eslint/ban-ts-comment
-// @ts-ignore
 import styles from '../styles/sidebar.component.css';
 import naverIcon from '../../../assets/images/naverbtn.svg';
 import googleIcon from '../../../assets/images/google_normal.svg';

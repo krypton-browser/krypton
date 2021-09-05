@@ -1,19 +1,26 @@
 import React from 'react';
-// eslint-disable-next-line @typescript-eslint/ban-ts-comment
-// @ts-ignore
+import classNames from 'classnames';
 import styles from '../styles/tab.component.css';
 
-interface TabProps {
+type TabProps = {
   readonly image: string;
   readonly title: string;
-}
+  readonly isCurrent: boolean;
+};
 
-// eslint-disable-next-line react/prop-types
-const Tab: React.FC<TabProps> = ({ image, title }) => {
+const Tab = ({ image, title, isCurrent }: TabProps) => {
   return (
-    <div className={styles.tab_item_wrapper}>
-      <img src={image} alt="favicon" className={styles.image} />
+    <div
+      className={classNames(
+        styles.tab_item_wrapper,
+        isCurrent ? styles.is_current : ''
+      )}
+    >
+      <img src={image} alt="favicon" className={styles.favicon} />
       <p className={styles.title}>{title}</p>
+      <button className={styles.delete_button} type="button">
+        x
+      </button>
     </div>
   );
 };
