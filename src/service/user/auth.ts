@@ -5,7 +5,7 @@ import path from 'path';
 import EventEmitter from 'stream';
 import { userDataPath } from './data';
 
-const databasePath = path.resolve(userDataPath, 'password.stormdb');
+export const databasePath = path.resolve(userDataPath, 'password.stormdb');
 const machineID = machineIdSync();
 
 export function shakeKey(password: string): string {

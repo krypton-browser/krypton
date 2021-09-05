@@ -1,5 +1,5 @@
 import { v4 } from 'uuid';
-import { IBookmark, IHistory, ITab } from '../../types/browsing';
+import { IBookmark, IVisitHistory, ITab } from '../../types/browsing';
 
 export function initialTab(): ITab {
   return {
@@ -19,7 +19,7 @@ export function initialBookmark(): IBookmark {
   };
 }
 
-export function initialHistory(): IHistory {
+export function initialHistory(): IVisitHistory {
   return {
     id: v4(),
     url: '',

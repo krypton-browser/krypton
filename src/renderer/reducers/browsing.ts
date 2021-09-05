@@ -31,8 +31,6 @@ export const browsingSlice = createSlice({
       const tabs = state.tabs.filter(({ id }) => id !== payload.id);
       state.tabs = tabs;
       if (payload.id === state.currentTab) {
-        // eslint-disable-next-line no-console
-        console.log(tabs[tabs.length - 1].id);
         state.currentTab = tabs[tabs.length - 1].id;
       }
     },

@@ -1,7 +1,7 @@
 /* eslint-disable  @typescript-eslint/no-explicit-any */
 
-import { IBookmark, IHistory, ITab } from '../../types/browsing';
-import { ISetting } from '../../types/setting';
+import { IBookmark, IVisitHistory, ITab } from '../../types/browsing';
+import { ISettings } from '../../types/setting';
 
 export interface IBrowsingState {
   tabs: ITab[];
@@ -26,7 +26,7 @@ export interface IAuthState {
 }
 
 export interface ISettingState {
-  setting: ISetting;
+  setting: ISettings;
   setSettingDone: boolean;
   setSettingLoading: boolean;
   setSettingError?: any;
@@ -36,7 +36,7 @@ export interface ISettingState {
 }
 
 export interface IDataState {
-  history: IHistory[];
+  history: IVisitHistory[];
   bookmarks: IBookmark[];
   themeImage?: string | null;
   loadHistoryDone: boolean;
