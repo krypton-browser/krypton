@@ -1,5 +1,5 @@
 import { v4 } from 'uuid';
-import { IBookmark, IHistory, ITab } from '../../types/browsing';
+import { IBookmark, IVisitHistory, ITab } from '../../types/browsing';
 
 export const initialTab: ITab = {
   id: v4(),
@@ -13,7 +13,7 @@ export const initialBookmark: IBookmark = {
   title: '',
 };
 
-export const initialHistory: IHistory = {
+export const initialHistory: IVisitHistory = {
   id: v4(),
   url: '',
   title: '',

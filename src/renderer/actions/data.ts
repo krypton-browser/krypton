@@ -1,16 +1,16 @@
 import { createAsyncThunk, PayloadAction } from '@reduxjs/toolkit';
 import ipcSender from '../utils/ipcSender';
-import { IBookmark, IHistory } from '../../types/browsing';
+import { IBookmark, IVisitHistory } from '../../types/browsing';
 import { data } from '../../channels';
 
 export const loadHistory = createAsyncThunk(
   'data/LOAD_HISTORY',
-  async (): Promise<IHistory[]> => ipcSender(data.history.load)
+  async (): Promise<IVisitHistory[]> => ipcSender(data.history.load)
 );
 
 export const addHistory = createAsyncThunk(
   'data/ADD_HISTORY',
-  async ({ payload }: PayloadAction<IHistory>, { rejectWithValue }) => {
+  async ({ payload }: PayloadAction<IVisitHistory>, { rejectWithValue }) => {
     const res = await ipcSender(data.history.add, payload);
     if (res === 'success') {
       return payload;

@@ -10,6 +10,11 @@ export interface IBookmark {
   title: string;
 }
 
-export interface IHistory extends IBookmark {
+export interface IVisitHistory extends IBookmark {
   datetime: string;
+}
+
+export interface ISearchHistory {
+  text: string;
+  link: string;
 }

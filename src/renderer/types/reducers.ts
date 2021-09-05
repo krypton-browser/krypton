@@ -1,6 +1,6 @@
 /* eslint-disable  @typescript-eslint/no-explicit-any */
 
-import { IBookmark, IHistory, ITab } from '../../types/browsing';
+import { IBookmark, IVisitHistory, ITab } from '../../types/browsing';
 import { ISetting } from '../../types/setting';
 
 export interface IBrowsingState {
@@ -36,7 +36,7 @@ export interface ISettingState {
 }
 
 export interface IDataState {
-  history: IHistory[];
+  history: IVisitHistory[];
   bookmarks: IBookmark[];
   themeImage?: string | null;
   loadHistoryDone: boolean;
