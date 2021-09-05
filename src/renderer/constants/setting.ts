@@ -1,7 +1,9 @@
-import { ISetting } from '../../types/setting';
+import { DefaultSearchers } from '../../service/user/searcher';
+import { ISettings } from '../../types/setting';
 
-export const initialSetting: ISetting = {
+export const initialSetting: ISettings = {
   useADBlock: true,
   useCookieReset: false,
   useScanPhishingSite: true,
+  SearchEngine: DefaultSearchers.DuckDuckGo,
 };

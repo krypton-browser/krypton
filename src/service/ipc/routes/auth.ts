@@ -1,3 +1,4 @@
+import { ipcMain } from 'electron';
 import Channel from '../ipc';
 import { auth } from '../../../channels';
 import { IPassword } from '../../../types/auth';
@@ -8,12 +9,14 @@ export default class {
 
   @Channel(auth.login)
   static login(_event: Electron.IpcMainEvent, args: IPassword) {
-    this.library.signin(args.password);
+    const result = this.library.signin(args.password);
+    ipcMain.emit(auth.login, result ? 'complete' : 'failure');
   }
 
   @Channel(auth.join)
   static join(_event: Electron.IpcMainEvent, args: IPassword) {
-    this.library.signup(args.password);
+    const result = this.library.signup(args.password);
+    ipcMain.emit(auth.join, result ? 'complete' : 'failure');
   }
 
   @Channel(auth.reset)

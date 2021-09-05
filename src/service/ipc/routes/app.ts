@@ -1,7 +1,6 @@
 import { BrowserWindow } from 'electron';
 import Channel from '../ipc';
 import { app } from '../../../channels';
-import { IPassword } from '../../../types/auth';
 
 export default class {
   @Channel(app.maximize)

@@ -2,7 +2,7 @@ import electron from 'electron';
 import path from 'path';
 import StormDB from 'stormdb';
 import { IBookmark, IVisitHistory } from '../../types/browsing';
-import { Searcher } from './searcher';
+import { ISettings } from '../../types/setting';
 
 export const userDataPath = (electron.app || electron.remote.app).getPath(
   'userData'
@@ -13,11 +13,6 @@ export const databasePath = path.resolve(userDataPath, 'database.stormdb');
 export interface SearchHistory {
   text: string;
   link: string;
-}
-
-export interface Settings {
-  SearchEngine: Searcher;
-  HttpAlert: boolean;
 }
 
 export class Database {
@@ -43,11 +38,11 @@ export class Database {
     }
   }
 
-  public GetSettings(): Settings {
-    return this.db.get('settings').value() as Settings;
+  public GetSettings(): ISettings {
+    return this.db.get('settings').value() as ISettings;
   }
 
-  public SetSettings(settings: Settings): boolean {
+  public SetSettings(settings: ISettings): boolean {
     try {
       this.db.set('settings', settings);
       return true;
