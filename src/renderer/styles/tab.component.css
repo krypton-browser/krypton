@@ -9,6 +9,16 @@
   user-select: auto;
   -webkit-app-region: no-drag;
   cursor: default;
+  animation: fadeIn 0.3s;
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
 }
 
 .tab_item_wrapper:hover > .delete_button {
@@ -47,6 +57,7 @@
   align-items: center;
   opacity: 0;
 }
+
 .delete_button:hover {
   background: rgba(0, 0, 0, 0.05);
 }

@@ -1,5 +1,5 @@
 import { createAsyncThunk } from '@reduxjs/toolkit';
-import ipcSender from '../utils/ipcSender';
+import { ipcSender } from '../utils/ipcSender';
 import { browsing } from '../../channels';
 
 export const loadPhishingSiteCheck = createAsyncThunk(

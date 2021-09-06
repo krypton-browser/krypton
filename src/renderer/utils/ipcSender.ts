@@ -2,7 +2,7 @@
 
 const { ipcRenderer } = window;
 
-const ipcSender = (channel: string, data: any = {}): Promise<any> =>
+export const ipcSender = (channel: string, data: any = {}): Promise<any> =>
   new Promise((resolve) => {
     ipcRenderer.send(channel, data);
     ipcRenderer.on(channel, (_event, arg) => {
@@ -10,4 +10,7 @@ const ipcSender = (channel: string, data: any = {}): Promise<any> =>
     });
   });
 
-export default ipcSender;
+export const ipcSenderNonBlock = (channel: string, data: any = {}): string => {
+  ipcRenderer.send(channel, data);
+  return 'complete';
+};

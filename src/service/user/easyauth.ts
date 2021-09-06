@@ -1,5 +1,7 @@
-import { unlink } from 'fs/promises';
+import { promises } from 'fs';
 import Authentication, { databasePath, shakeKey } from './auth';
+
+const { unlink } = promises;
 
 export default class EasyAuth extends Authentication {
   public signup(password: string) {

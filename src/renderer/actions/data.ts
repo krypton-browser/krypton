@@ -1,5 +1,5 @@
 import { createAsyncThunk, PayloadAction } from '@reduxjs/toolkit';
-import ipcSender from '../utils/ipcSender';
+import { ipcSender } from '../utils/ipcSender';
 import { IBookmark, IVisitHistory } from '../../types/browsing';
 import { data } from '../../channels';
 

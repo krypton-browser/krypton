@@ -5,6 +5,8 @@ import Home from './pages/home';
 import Browsing from './pages/browsing';
 import { useAppDispatch } from './configureStore';
 import { browsingSlice } from './reducers/browsing';
+import { test } from '../channels';
+import { ipcSender } from './utils/ipcSender';
 
 const { ipcRenderer } = window;
 
@@ -15,7 +17,11 @@ const { initialize } = browsingSlice.actions;
 export default function App() {
   const dispatch = useAppDispatch();
   useEffect(() => {
-    if (!ipcRenderer) console.log('close...');
+    if (!ipcRenderer) console.log('IPC error...');
+    (async () => {
+      const res = await ipcSender(test.ping, { ping: 'hello' });
+      console.log(res.pong);
+    })();
     dispatch(initialize());
   }, [dispatch]);
   return (

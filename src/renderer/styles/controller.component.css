@@ -16,6 +16,7 @@
   border: none;
   padding: 0 0 0 6px;
   letter-spacing: 0.4px;
+  transition: 0.3s;
 }
 .url_text_box:focus {
   outline: none;
@@ -41,12 +42,13 @@
   align-items: center;
   justify-content: center;
   transition: 0.3s;
+  border-radius: 100%;
 }
 .button:focus {
   outline: none;
 }
 .button:hover {
-  background: rgba(0, 0, 0, 0.08);
+  background: rgba(0, 0, 0, 0.03);
 }
 
 .icon {

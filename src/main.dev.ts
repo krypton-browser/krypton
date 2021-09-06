@@ -81,8 +81,6 @@ const createWindow = async () => {
     frame: false,
   });
 
-  mainWindow.maximize();
-
   mainWindow.loadURL(`file://${__dirname}/index.html`);
 
   // @TODO: Use 'ready-to-show' event

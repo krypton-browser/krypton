@@ -24,7 +24,11 @@ const Controller: React.FC = () => {
           <img src={reloadIcon} alt="reload" className={styles.icon} />
         </button>
       </div>
-      <input type="text" className={styles.url_text_box} />
+      <input
+        type="text"
+        className={styles.url_text_box}
+        placeholder="검색어 또는 URL 입력"
+      />
       <div className={styles.button_wrapper}>
         <button type="button" className={styles.button}>
           <img src={bookmarkIcon} alt="bookmark" className={styles.icon} />

@@ -25,6 +25,10 @@ export const browsing = {
   load_phishing_site_check: VALUE('BROWSING', 'LOAD_PHISHING_SITE_CHECK'),
 };
 
+export const test = {
+  ping: VALUE('TEST', 'PING'),
+};
+
 export const data = {
   history: {
     load: VALUE('DATA', 'HISTORY', 'LOAD'),
@@ -54,4 +58,4 @@ export const app = {
   quit: VALUE('APP', 'QUIT'),
 };
 
-export default { auth, browsing, data, setting, app };
+export default { auth, browsing, data, setting, app, test };

@@ -3,7 +3,7 @@
   bottom: 0;
   left: 0;
   width: 60px;
-  height: calc(100% - 76px);
+  height: calc(100% - 78px);
   display: flex;
   align-items: center;
   justify-content: space-between;
@@ -11,6 +11,8 @@
   background-color: #f3f3f3;
   z-index: 1000;
   box-shadow: 0 1px 3px 0 rgba(0, 0, 0, 0.16);
+  padding: 70px 0 0;
+  box-sizing: border-box;
 }
 
 .latest_data_wrapper {
@@ -51,4 +53,10 @@
 
 .menu_image {
   height: 23px;
+}
+
+@media screen and (max-height: 800px) {
+  .sidebar {
+    padding: 0;
+  }
 }
