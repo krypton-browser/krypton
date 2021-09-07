@@ -8,6 +8,11 @@
   box-shadow: 0 1px 3px 0 rgba(0, 0, 0, 0.16);
 }
 
+.input_wrapper {
+  width: 100%;
+  height: 100%;
+}
+
 .url_text_box {
   border-radius: 3px;
   box-sizing: border-box;

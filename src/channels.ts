@@ -52,6 +52,7 @@ export const setting = {
 };
 
 export const app = {
+  load_is_maximize: VALUE('APP', 'LOAD_IS_MAXIMIZE'),
   maximize: VALUE('APP', 'MAXIMIZE'),
   unMaximize: VALUE('APP', 'UN_MAXIMIZE'),
   minimize: VALUE('APP', 'MINIMIZE'),

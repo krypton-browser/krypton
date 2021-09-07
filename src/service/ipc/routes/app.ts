@@ -3,6 +3,12 @@ import Channel from '../ipc';
 import { app } from '../../../channels';
 
 export default class {
+  @Channel(app.load_is_maximize)
+  static loadIsMaximize(event: Electron.IpcMainEvent) {
+    const isMaximize = BrowserWindow.getAllWindows()[0].isMaximized();
+    event.sender.send(app.load_is_maximize, isMaximize.toString());
+  }
+
   @Channel(app.maximize)
   static maximize() {
     /*

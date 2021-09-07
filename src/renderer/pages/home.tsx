@@ -1,31 +1,20 @@
 import React from 'react';
-import { Link } from 'react-router-dom';
-import styles from '../styles/home.page.css';
-
-import duckduckgoIcon from '../../../assets/images/duckduckgo_normal.svg';
-import searchIcon from '../../../assets/images/search.svg';
 import Layout from '../components/Layout';
+import Default from '../components/Default';
+import { useAppSelector } from '../configureStore';
+import Webview from '../components/Webview';
 
 const Home: React.FC = () => {
+  const { tabs } = useAppSelector((state) => state.browsing);
   return (
     <Layout>
-      <div className={styles.home_container}>
-        <div className={styles.search_box}>
-          <img
-            src={duckduckgoIcon}
-            className={styles.duckduckgo}
-            alt="search engine"
-          />
-          <input
-            type="text"
-            className={styles.text_box}
-            placeholder="검색어 또는 URL 입력"
-          />
-          <Link to="/">
-            <img src={searchIcon} className={styles.search_icon} alt="search" />
-          </Link>
-        </div>
-      </div>
+      {tabs.map(({ id, stack, point }) =>
+        stack[point] === '/' ? (
+          <Default id={id} />
+        ) : (
+          <Webview key={id} id={id} url={stack[point]} />
+        )
+      )}
     </Layout>
   );
 };

@@ -1,11 +1,30 @@
-import React from 'react';
+import React, { useEffect } from 'react';
+import { useAppSelector } from '../configureStore';
+
+import styles from '../styles/webview.component.css';
 
 type WebviewProps = {
+  readonly id: string;
   readonly url: string;
 };
 
-const Webview = ({ url }: WebviewProps) => {
-  return <webview src={url} style={{ width: '100%', height: '100%' }} />;
+const Webview = ({ id, url }: WebviewProps) => {
+  const { currentTab } = useAppSelector((state) => state.browsing);
+  useEffect(() => {
+    console.log(url);
+  }, [url]);
+  return (
+    <webview
+      allowFullScreen={true as boolean}
+      allowpopups={true as boolean}
+      className={styles.webview}
+      autosize={false as boolean}
+      src={url}
+      style={{
+        display: id === currentTab ? 'inline-flex' : 'none',
+      }}
+    />
+  );
 };
 
 export default Webview;
