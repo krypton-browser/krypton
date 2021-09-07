@@ -1,6 +1,7 @@
 .tab_item_wrapper {
   width: 100%;
-  max-width: 100px;
+  height: 100%;
+  max-width: 140px;
   display: flex;
   align-items: center;
   padding: 0 10px;
@@ -32,22 +33,26 @@
 
 .is_not_current {
   z-index: 1000;
-  background: #f1f2f3;
 }
 
 .favicon {
-  margin: 1px 10px 0 0;
+  margin: 1px 8px 0 0;
   width: 15px !important;
 }
 
 .title {
-  font-size: 15px;
-  width: 50px;
+  font-size: 12px;
+  max-width: 90px;
+  min-width: 55%;
+  word-break: break-word;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  overflow: hidden;
 }
 
 .delete_button {
-  width: 25px;
-  height: 25px;
+  width: 25px !important;
+  height: 25px !important;
   border-radius: 100%;
   border: none;
   background: none;

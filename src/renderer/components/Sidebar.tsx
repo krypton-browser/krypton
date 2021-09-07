@@ -4,6 +4,8 @@ import styles from '../styles/sidebar.component.css';
 import naverIcon from '../../../assets/images/naverbtn.svg';
 import googleIcon from '../../../assets/images/google_normal.svg';
 import bookmarkIcon from '../../../assets/images/star.svg';
+import settingIcon from '../../../assets/images/setting-icon.svg';
+import themeImageIcon from '../../../assets/images/theme_image-icon.svg';
 
 const Sidebar: React.FC = () => {
   return (
@@ -35,13 +37,13 @@ const Sidebar: React.FC = () => {
         </Link>
         <Link to="/">
           <img
-            src={bookmarkIcon}
+            src={themeImageIcon}
             className={styles.menu_image}
             alt="background"
           />
         </Link>
         <Link to="/">
-          <img src={bookmarkIcon} className={styles.menu_image} alt="setting" />
+          <img src={settingIcon} className={styles.menu_image} alt="setting" />
         </Link>
       </div>
     </div>

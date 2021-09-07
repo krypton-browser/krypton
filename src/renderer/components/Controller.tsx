@@ -10,44 +10,67 @@ import { browsingSlice } from '../reducers/browsing';
 
 import { useAppDispatch, useAppSelector } from '../configureStore';
 
-const { addUrl } = browsingSlice.actions;
+const { addUrl, moveSpace } = browsingSlice.actions;
 
 const Controller: React.FC = () => {
-  const { currentTab } = useAppSelector((state) => state.browsing);
+  const { tabs, currentTab } = useAppSelector((state) => state.browsing);
   const [urlText, setUrlText] = useState<string>('');
   const dispatch = useAppDispatch();
+
   const handleChangeURLTextBox = useCallback(
     (e) => setUrlText(e.target.value),
     []
   );
-
   const handleSubmitURLTextBox = useCallback(
     (e) => {
       e.preventDefault();
       const url = isUrl(urlText)
         ? urlText
-        : `https://www.google.com/search?q=${urlText}`;
+        : `https://www.google.com/search?q=${encodeURI(urlText)}`;
       dispatch(addUrl({ url }));
     },
     [dispatch, urlText]
   );
+  const handleClickBackSpace = () => dispatch(moveSpace({ mode: 'back' }));
+  const handleClickForwardSpace = () =>
+    dispatch(moveSpace({ mode: 'forward' }));
+  const handleClickReload = () => {};
 
-  useEffect(() => setUrlText(''), [currentTab]);
+  useEffect(() => {
+    tabs.forEach(({ id, stack, point }) => {
+      if (id !== currentTab) return true;
+      setUrlText(stack[point]);
+      return false;
+    });
+  }, [currentTab, tabs]);
 
+  /* eslint-disable jsx-a11y/no-noninteractive-element-interactions */
   return (
     <div className={styles.controller}>
       <div className={styles.button_wrapper}>
-        <button type="button" className={styles.button}>
+        <button
+          type="button"
+          className={styles.button}
+          onClick={handleClickBackSpace}
+        >
           <img src={backspaceIcon} alt="backspace" className={styles.icon} />
         </button>
-        <button type="button" className={styles.button}>
+        <button
+          type="button"
+          className={styles.button}
+          onClick={handleClickForwardSpace}
+        >
           <img
             src={forwardSpaceIcon}
             alt="forwardSpace"
             className={styles.icon}
           />
         </button>
-        <button type="button" className={styles.button}>
+        <button
+          type="button"
+          className={styles.button}
+          onClick={handleClickReload}
+        >
           <img src={reloadIcon} alt="reload" className={styles.icon} />
         </button>
       </div>
@@ -62,6 +85,7 @@ const Controller: React.FC = () => {
           placeholder="검색어 또는 URL 입력"
           onChange={handleChangeURLTextBox}
           onSubmit={handleSubmitURLTextBox}
+          value={urlText}
         />
       </form>
       <div className={styles.button_wrapper}>

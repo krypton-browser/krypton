@@ -9,8 +9,8 @@ const Home: React.FC = () => {
   return (
     <Layout>
       {tabs.map(({ id, stack, point }) =>
-        stack[point] === '/' ? (
-          <Default id={id} />
+        stack[point] === '' ? (
+          <Default key={id} id={id} />
         ) : (
           <Webview key={id} id={id} url={stack[point]} />
         )

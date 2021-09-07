@@ -2,6 +2,7 @@
   width: auto;
   z-index: 1000;
   display: flex;
+  align-items: center;
 }
 
 .frame_button_wrapper {
@@ -9,7 +10,9 @@
 }
 
 .add_tab_button {
-  width: 35px;
+  margin: 0 0 0 8px;
+  height: calc(100% - 10px);
+  padding: 0 6px;
   border: none;
   display: flex;
   justify-content: center;
@@ -22,9 +25,9 @@
   border-radius: 100%;
 }
 .add_tab_button:hover {
-  background: rgba(0, 0, 0, 0.12);
+  background: rgba(0, 0, 0, 0.1);
 }
 
 .add_tab_button .icon {
-  width: 14px;
+  width: 12px;
 }

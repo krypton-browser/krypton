@@ -1,9 +1,7 @@
 .sidebar {
-  position: fixed;
-  bottom: 0;
-  left: 0;
   width: 60px;
-  height: calc(100% - 78px);
+  margin: 1px 0 0;
+  height: calc(100vh - 78px);
   display: flex;
   align-items: center;
   justify-content: space-between;
@@ -43,6 +41,7 @@
   display: flex;
   flex-direction: column;
   justify-content: space-around;
+  align-items: center;
   height: 160px;
   padding: 0 0 10px;
 }

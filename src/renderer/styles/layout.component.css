@@ -4,6 +4,17 @@
   height: 100vh !important;
 }
 
+.main_container {
+  width: 100vw;
+  display: flex;
+  align-items: center;
+}
+
+.page_wrapper {
+  height: calc(100vh - 78px);
+  width: calc(100vw - 61px);
+}
+
 .hex_image {
   position: absolute;
   height: 100%;

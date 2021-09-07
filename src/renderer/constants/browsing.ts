@@ -4,8 +4,9 @@ import { IBookmark, IVisitHistory, ITab } from '../../types/browsing';
 export function initialTab(): ITab {
   return {
     id: v4(),
+    url: '',
     point: 0,
-    stack: ['/'],
+    stack: [''],
     title: '새 탭',
     favicon: 'http://images.sinopoda.com/favicon.svg',
   };

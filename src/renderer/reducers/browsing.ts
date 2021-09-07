@@ -34,21 +34,62 @@ export const browsingSlice = createSlice({
         state.currentTab = tabs[tabs.length - 1].id;
       }
     },
-    addUrl: (state, { payload: { url } }: PayloadAction<{ url: string }>) => {
+    updateTab: (
+      state,
+      {
+        payload: { id: tabId, ...data },
+      }: PayloadAction<{
+        id: string;
+        url?: string;
+        favicon?: string;
+        title?: string;
+      }>
+    ) => {
       const newTabs = state.tabs;
-      // eslint-disable-next-line no-restricted-syntax
-      for (const tab of newTabs) {
-        if (tab.id === state.currentTab) {
-          const { id, point, stack } = tab;
-          newTabs[newTabs.indexOf(tab)] = {
+      state.tabs.forEach(({ id, ...tab }, i): boolean => {
+        if (id !== tabId) return true;
+        newTabs[i] = { id, ...tab, ...data };
+        return false;
+      });
+      state.tabs = newTabs;
+    },
+    addURLSoft: (
+      state,
+      {
+        payload: { id: tabId, url },
+      }: PayloadAction<{
+        id: string;
+        url: string;
+      }>
+    ) => {
+      const newTabs = state.tabs;
+      state.tabs.forEach(({ id, stack, ...tab }, i): boolean => {
+        if (id !== tabId) return true;
+        newTabs[i] = { id, ...tab, stack: [url, ...stack] };
+        return false;
+      });
+      state.tabs = newTabs;
+    },
+    addUrl: (
+      state,
+      {
+        payload: { id: tabId, url },
+      }: PayloadAction<{ id?: string; url: string }>
+    ) => {
+      const newTabs = state.tabs;
+      state.tabs.forEach(({ id, point, stack, ...tab }, i): boolean => {
+        if ((tabId && tabId === id) || (!tabId && id === state.currentTab)) {
+          newTabs[i] = {
             ...tab,
             id,
+            url,
             point: 0,
             stack: [url, ...stack.slice(point)],
           };
-          break;
+          return false;
         }
-      }
+        return true;
+      });
       state.tabs = newTabs;
     },
     moveSpace: (
@@ -56,16 +97,20 @@ export const browsingSlice = createSlice({
       { payload: { mode } }: PayloadAction<{ mode: 'back' | 'forward' }>
     ) => {
       const newTabs = state.tabs;
-      // eslint-disable-next-line no-restricted-syntax
-      for (const tab of newTabs) {
-        if (tab.id === state.currentTab) {
-          newTabs[newTabs.indexOf(tab)] = {
+      state.tabs.forEach(({ id, point, ...tab }, i): boolean => {
+        if (id !== state.currentTab) return true;
+        if (
+          (mode === 'forward' && point > 0) ||
+          (mode === 'back' && point + 1 < tab.stack.length)
+        ) {
+          newTabs[i] = {
+            id,
             ...tab,
-            point: tab.point + (mode === 'back' ? 1 : -1),
+            point: point + (mode === 'back' ? 1 : -1),
           };
-          break;
-        }
-      }
+        } else console.log('pause');
+        return false;
+      });
       state.tabs = newTabs;
     },
   },

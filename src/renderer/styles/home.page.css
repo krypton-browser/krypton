@@ -2,7 +2,6 @@
   width: 100%;
   height: 100%;
   display: flex;
-  align-items: center;
   justify-content: center;
   padding: 200px 30px 0 30px;
   text-align: center;
@@ -67,6 +66,12 @@
 
 .search_icon {
   height: 22px;
+}
+
+.webview {
+  width: 100%;
+  height: 100%;
+  background: #fff;
 }
 
 @media screen and (max-height: 600px) {

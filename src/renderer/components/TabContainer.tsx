@@ -12,7 +12,9 @@ const { addTab } = browsingSlice.actions;
 const TabContainer: React.FC = () => {
   const { tabs } = useAppSelector((state) => state.browsing);
   const dispatch = useAppDispatch();
+
   const handleAddTab = () => dispatch(addTab());
+
   return (
     <div className={styles.container}>
       {tabs.map(({ id, stack, point, title, favicon }) => (

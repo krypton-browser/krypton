@@ -4,6 +4,8 @@ import styles from '../styles/tab.component.css';
 import { useAppDispatch, useAppSelector } from '../configureStore';
 import { browsingSlice } from '../reducers/browsing';
 import deleteIcon from '../../../assets/images/delete-icon.svg';
+import { ipcSenderNonBlock } from '../utils/ipcSender';
+import { app } from '../../channels';
 
 const { moveTab, removeTab } = browsingSlice.actions;
 
@@ -14,8 +16,9 @@ type TabProps = {
 };
 
 const Tab = ({ id, favicon, title }: TabProps) => {
-  const { currentTab } = useAppSelector((state) => state.browsing);
+  const { tabs, currentTab } = useAppSelector((state) => state.browsing);
   const dispatch = useAppDispatch();
+
   const handleClickTab = useCallback(
     (event: React.MouseEvent<HTMLDivElement>) => {
       const className = (event.target as HTMLElement)?.className;
@@ -28,10 +31,11 @@ const Tab = ({ id, favicon, title }: TabProps) => {
     },
     [dispatch, id]
   );
-  const handleRemoveTab = useCallback(
-    () => dispatch(removeTab({ id })),
-    [dispatch, id]
-  );
+  const handleRemoveTab = () => {
+    if (tabs.length === 1) ipcSenderNonBlock(app.quit);
+    else dispatch(removeTab({ id }));
+  };
+
   return (
     // eslint-disable-next-line jsx-a11y/click-events-have-key-events,jsx-a11y/no-static-element-interactions
     <div

@@ -2,7 +2,7 @@ import React, { useEffect } from 'react';
 import { BrowserRouter as Router, Switch, Route } from 'react-router-dom';
 import './App.global.css';
 import Home from './pages/home';
-import Browsing from './pages/browsing';
+import Login from './pages/login';
 import { useAppDispatch } from './configureStore';
 import { browsingSlice } from './reducers/browsing';
 import { test } from '../channels';
@@ -27,8 +27,8 @@ export default function App() {
   return (
     <Router>
       <Switch>
-        <Route path="/" component={Home} exact />
-        <Route path="/browsing" component={Browsing} exact />
+        <Route path="/" component={Login} exact />
+        <Route path="/login" component={Login} exact />
         <Route path="*" component={Home} />
       </Switch>
     </Router>
