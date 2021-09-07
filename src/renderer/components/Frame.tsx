@@ -58,3 +58,51 @@ const Frame: React.FC = () => {
 };
 
 export default Frame;
+
+export const SubFrame: React.FC = () => {
+  const [windowIsMaximized, setWindowIsMaximized] = useState<boolean>(false);
+
+  const close = (): void => {
+    ipcSenderNonBlock(app.quit);
+  };
+  const minimize = (): void => {
+    ipcSenderNonBlock(app.minimize, 1);
+  };
+  const handleMaximize = async (): Promise<void> => {
+    const isMaximize = JSON.parse(await ipcSender(app.load_is_maximize));
+    ipcSenderNonBlock(isMaximize ? app.unMaximize : app.maximize);
+    setWindowIsMaximized(!isMaximize);
+  };
+  useEffect(() => {
+    (async () => {
+      const isMaximize = JSON.parse(await ipcSender(app.load_is_maximize));
+      setWindowIsMaximized(isMaximize);
+    })();
+  }, []);
+  return (
+    <>
+      <hr className={styles.side_line} />
+      <header className={styles.frame_container}>
+        <div className={styles.frame_button_wrapper}>
+          <button className={styles.button} type="button" onClick={minimize}>
+            <img src={minimizeIcon} alt="minimize" className={styles.icon} />
+          </button>
+          <button
+            className={styles.button}
+            type="button"
+            onClick={handleMaximize}
+          >
+            <img
+              src={windowIsMaximized ? unMaximizeIcon : maximizeIcon}
+              alt="close"
+              className={styles.icon}
+            />
+          </button>
+          <button className={styles.button} type="button" onClick={close}>
+            <img src={closeIcon} alt="close" className={styles.icon} />
+          </button>
+        </div>
+      </header>
+    </>
+  );
+};

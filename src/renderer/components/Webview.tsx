@@ -1,9 +1,11 @@
 /* eslint-disable  @typescript-eslint/no-explicit-any */
 
 import React, { useEffect, useRef } from 'react';
+import { v4 } from 'uuid';
 import { useAppDispatch, useAppSelector } from '../configureStore';
 import { browsingSlice } from '../reducers/browsing';
 import styles from '../styles/webview.component.css';
+import { addHistory } from '../actions/data';
 
 const { updateTab } = browsingSlice.actions;
 
@@ -38,6 +40,16 @@ const Webview = ({ id, url }: WebviewProps) => {
           );
         }
       );
+      target.addEventListener('will-navigate', ({ url: willURL }: any) => {
+        dispatch(
+          addHistory({
+            id: v4(),
+            title: target.getTitle(),
+            url: willURL,
+            datetime: new Date().toString(),
+          })
+        );
+      });
     }
   }, [dispatch, id, url]);
   return (

@@ -1,16 +1,11 @@
-.login_wrapper {
-  padding: 50px 0 0;
-  text-align: center;
+.join_wrapper {
   width: 100%;
-}
-
-.logo_wrapper {
-  margin: 0 auto;
-  width: 130px;
+  text-align: center;
+  padding: 50px 0 0;
 }
 
 .logo {
-  width: 100%;
+  width: 150px;
 }
 
 .logo_text {
@@ -19,7 +14,7 @@
 }
 
 .top_bar {
-  margin: 70px auto 0;
+  margin: 30px auto 0;
   display: flex;
   justify-content: center;
 }
@@ -97,14 +92,12 @@
 
 .password::placeholder {
   color: #bebebe;
-  font-family: 'noto';
 }
 
 .pass_submit {
   border: none;
   background-color: #54adfd;
   font-size: 30px;
-  font-family: 'noto';
   width: 98%;
   color: white;
   height: 90%;

@@ -9,6 +9,7 @@ import settingMenuIcon from '../../../assets/images/setting-menu-icon.svg';
 import { browsingSlice } from '../reducers/browsing';
 
 import { useAppDispatch, useAppSelector } from '../configureStore';
+// import { addBookmarks } from "../actions/data";
 
 const { addUrl, moveSpace } = browsingSlice.actions;
 
@@ -35,6 +36,9 @@ const Controller: React.FC = () => {
   const handleClickForwardSpace = () =>
     dispatch(moveSpace({ mode: 'forward' }));
   const handleClickReload = () => {};
+  const handleAddBookmark = () => {
+    alert('개발 중인 기능입니다.');
+  };
 
   useEffect(() => {
     tabs.forEach(({ id, stack, point }) => {
@@ -89,7 +93,11 @@ const Controller: React.FC = () => {
         />
       </form>
       <div className={styles.button_wrapper}>
-        <button type="button" className={styles.button}>
+        <button
+          type="button"
+          className={styles.button}
+          onClick={handleAddBookmark}
+        >
           <img src={bookmarkIcon} alt="bookmark" className={styles.icon} />
         </button>
         <button type="button" className={styles.button}>

@@ -1,5 +1,10 @@
 import React, { useEffect } from 'react';
-import { BrowserRouter as Router, Switch, Route } from 'react-router-dom';
+import {
+  BrowserRouter as Router,
+  Switch,
+  Route,
+  Redirect,
+} from 'react-router-dom';
 import './App.global.css';
 import Home from './pages/home';
 import Login from './pages/login';
@@ -7,6 +12,7 @@ import { useAppDispatch } from './configureStore';
 import { browsingSlice } from './reducers/browsing';
 import { test } from '../channels';
 import { ipcSender } from './utils/ipcSender';
+import Join from './pages/join';
 
 const { ipcRenderer } = window;
 
@@ -27,9 +33,10 @@ export default function App() {
   return (
     <Router>
       <Switch>
-        <Route path="/" component={Login} exact />
+        <Route path="/" component={Home} exact />
         <Route path="/login" component={Login} exact />
-        <Route path="*" component={Home} />
+        <Route path="/join" component={Join} exact />
+        <Route path="*" component={() => <Redirect to="/" />} />
       </Switch>
     </Router>
   );

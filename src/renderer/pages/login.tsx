@@ -1,31 +1,67 @@
-import React from 'react';
-
-// import styles from '../styles/login.page.css';
+import React, { ChangeEvent, FormEvent, useEffect, useState } from 'react';
+import styles from '../styles/login.page.css';
 import logoNoTitle from '../../../assets/images/logo_no_title.svg';
 import { SubLayout } from '../components/Layout';
 import lockImage from '../../../assets/images/lock.svg';
+import { useAppDispatch, useAppSelector } from '../configureStore';
+import { login } from '../actions/auth';
+import { HistoryProps } from '../types/props';
 
-const Login: React.FC = () => {
+const Login = ({ history }: HistoryProps) => {
+  const dispatch = useAppDispatch();
+  const { loginDone } = useAppSelector((state) => state.auth);
+  const [password, setPassword] = useState<string>('');
+  const [isAction, setIsAction] = useState<boolean>(false);
+
+  const handleChangePassword = (e: ChangeEvent<HTMLInputElement>) => {
+    console.log(e.target.value);
+    setPassword(e.target.value);
+  };
+
+  const handleSubmitPassword = (e: FormEvent) => {
+    e.preventDefault();
+    console.log('submit!');
+    dispatch(login({ password }));
+  };
+
+  useEffect(() => {
+    if (isAction && loginDone) {
+      alert('로그인 성공!');
+      history.push('/');
+    } else setIsAction(true);
+  }, [history, isAction, loginDone]);
+
   return (
     <SubLayout>
-      <div>
-        <img src={logoNoTitle} className="logo" alt="dat" />
-      </div>
-      <div className="top_bar">
-        <div className="bar_back">
-          <img src={lockImage} className="lock_image" alt="dat" />
-          <input type="text" className="password" placeholder="비밀번호" />
+      <form
+        className={styles.login_wrapper}
+        autoComplete="off"
+        onSubmit={handleSubmitPassword}
+      >
+        <div className={styles.logo_wrapper}>
+          <img src={logoNoTitle} className={styles.logo} alt="logo" />
         </div>
-      </div>
-      <div className="bottom_bar">
-        <div className="start">
-          <input
-            type="submit"
-            className="pass_submit"
-            value="Krypton 시작하기"
-          />
+        <div className={styles.top_bar}>
+          <div className={styles.bar_back}>
+            <img src={lockImage} className={styles.lock_image} alt="dat" />
+            <input
+              type="text"
+              className={styles.password}
+              placeholder="비밀번호"
+              onChange={handleChangePassword}
+            />
+          </div>
         </div>
-      </div>
+        <div className={styles.bottom_bar}>
+          <div className={styles.start}>
+            <input
+              type="submit"
+              className={styles.pass_submit}
+              value="Krypton 시작하기"
+            />
+          </div>
+        </div>
+      </form>
     </SubLayout>
   );
 };

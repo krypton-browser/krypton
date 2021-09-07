@@ -1,4 +1,4 @@
-import { createAsyncThunk, PayloadAction } from '@reduxjs/toolkit';
+import { createAsyncThunk } from '@reduxjs/toolkit';
 import { ipcSender } from '../utils/ipcSender';
 import { IBookmark, IVisitHistory } from '../../types/browsing';
 import { data } from '../../channels';
@@ -10,7 +10,7 @@ export const loadHistory = createAsyncThunk(
 
 export const addHistory = createAsyncThunk(
   'data/ADD_HISTORY',
-  async ({ payload }: PayloadAction<IVisitHistory>, { rejectWithValue }) => {
+  async (payload: IVisitHistory, { rejectWithValue }) => {
     const res = await ipcSender(data.history.add, payload);
     if (res === 'success') {
       return payload;
@@ -21,7 +21,7 @@ export const addHistory = createAsyncThunk(
 
 export const removeHistory = createAsyncThunk(
   'data/REMOVE_HISTORY',
-  async ({ payload }: PayloadAction<{ id: string }>, { rejectWithValue }) => {
+  async (payload: { id: string }, { rejectWithValue }) => {
     if (payload.id) {
       const res = await ipcSender(data.history.remove, payload);
       if (res === 'success') {
@@ -39,7 +39,7 @@ export const loadBookmarks = createAsyncThunk(
 
 export const addBookmarks = createAsyncThunk(
   'data/SET_BOOKMARKS',
-  async ({ payload }: PayloadAction<IBookmark>, { rejectWithValue }) => {
+  async (payload: IBookmark, { rejectWithValue }) => {
     const res = await ipcSender(data.bookmarks.add, payload);
     if (res === 'success') {
       return payload;
@@ -50,7 +50,7 @@ export const addBookmarks = createAsyncThunk(
 
 export const removeBookmarks = createAsyncThunk(
   'data/REMOVE_BOOKMARKS',
-  async ({ payload }: PayloadAction<{ id: string }>, { rejectWithValue }) => {
+  async (payload: { id: string }, { rejectWithValue }) => {
     if (payload.id) {
       const res = await ipcSender(data.bookmarks.remove, payload);
       if (res === 'success') {
@@ -68,10 +68,7 @@ export const loadThemeImage = createAsyncThunk(
 
 export const setThemeImage = createAsyncThunk(
   'data/SET_THEME_IMAGE',
-  async (
-    { payload }: PayloadAction<{ image: string }>,
-    { rejectWithValue }
-  ) => {
+  async (payload: { image: string }, { rejectWithValue }) => {
     const res = await ipcSender(data.themeImage.set, payload);
     if (res === 'success') {
       return payload.image;
