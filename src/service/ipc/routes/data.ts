@@ -7,24 +7,21 @@ import { IBookmark, IVisitHistory } from '../../../types/browsing';
 export default class {
   private static database: Database = new Database();
 
-  // #region history
   @Channel(data.history.load)
   static history_load(event: IpcMainEvent) {
-    const history = this.database.GetVisitHistories();
-    console.log('history', history);
-    event.sender.send(data.history.load, history);
+    event.reply(data.history.load, this.database.GetVisitHistories());
   }
 
   @Channel(data.history.add)
-  static history_add(_event: IpcMainEvent, args: IVisitHistory) {
+  static history_add(event: IpcMainEvent, args: IVisitHistory) {
     const result = this.database.AddVisitHistory(args);
-    ipcMain.emit(data.history.add, result ? 'complete' : 'failure');
+    event.reply(data.history.add, result ? 'complete' : 'failure');
   }
 
   @Channel(data.history.remove)
-  static history_remove(_event: IpcMainEvent, args: string) {
+  static history_remove(event: IpcMainEvent, args: string) {
     const result = this.database.RemoveVisitHistory(args);
-    ipcMain.emit(data.history.add, result ? 'complete' : 'failure');
+    event.reply(data.history.add, result ? 'complete' : 'failure');
   }
   // #endregion
 

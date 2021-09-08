@@ -1,4 +1,4 @@
-import { ipcMain } from 'electron';
+import { IpcMainEvent } from 'electron';
 import Channel from '../ipc';
 import { auth } from '../../../channels';
 import { IPassword } from '../../../types/auth';
@@ -8,15 +8,15 @@ export default class {
   private static library: EasyAuth = new EasyAuth();
 
   @Channel(auth.login)
-  static login(_event: Electron.IpcMainEvent, args: IPassword) {
+  static login(event: IpcMainEvent, args: IPassword) {
     const result = this.library.signIn(args.password);
-    ipcMain.emit(auth.login, result ? 'complete' : 'failure');
+    event.reply(auth.login, result ? 'complete' : 'failure');
   }
 
   @Channel(auth.join)
-  static join(_event: Electron.IpcMainEvent, args: IPassword) {
+  static join(event: IpcMainEvent, args: IPassword) {
     const result = this.library.signup(args.password);
-    ipcMain.emit(auth.join, result ? 'complete' : 'failure');
+    event.reply(auth.join, result ? 'complete' : 'failure');
   }
 
   @Channel(auth.reset)
