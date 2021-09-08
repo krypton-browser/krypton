@@ -8,13 +8,13 @@ export default class {
   private static database: Database = new Database();
 
   @Channel(setting.load)
-  static load() {
-    ipcMain.emit(setting.load, this.database.GetSettings());
+  static load(event: Electron.IpcMainEvent) {
+    event.reply(setting.load, this.database.GetSettings());
   }
 
   @Channel(setting.set)
-  static set(_event: Electron.IpcMainEvent, args: ISettings) {
+  static set(event: Electron.IpcMainEvent, args: ISettings) {
     const result = this.database.SetSettings(args);
-    ipcMain.emit(setting.set, result ? 'complete' : 'failure');
+    event.reply(setting.set, result ? 'complete' : 'failure');
   }
 }

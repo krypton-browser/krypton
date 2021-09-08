@@ -9,20 +9,20 @@ export default class {
 
   // #region history
   @Channel(data.history.load)
-  static history_load() {
-    ipcMain.emit(data.history.load, this.database.GetVisitHistories());
+  static history_load(event: Electron.IpcMainEvent) {
+    event.reply(data.history.load, this.database.GetVisitHistories());
   }
 
   @Channel(data.history.add)
-  static history_add(_event: Electron.IpcMainEvent, args: IVisitHistory) {
+  static history_add(event: Electron.IpcMainEvent, args: IVisitHistory) {
     const result = this.database.AddVisitHistory(args);
-    ipcMain.emit(data.history.add, result ? 'complete' : 'failure');
+    event.reply(data.history.add, result ? 'complete' : 'failure');
   }
 
   @Channel(data.history.remove)
-  static history_remove(_event: Electron.IpcMainEvent, args: string) {
+  static history_remove(event: Electron.IpcMainEvent, args: string) {
     const result = this.database.RemoveVisitHistory(args);
-    ipcMain.emit(data.history.add, result ? 'complete' : 'failure');
+    event.reply(data.history.add, result ? 'complete' : 'failure');
   }
   // #endregion
 
