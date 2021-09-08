@@ -1,4 +1,4 @@
-import { ipcMain } from 'electron';
+import { ipcMain, IpcMainEvent } from 'electron';
 import Channel from '../ipc';
 import { data } from '../../../channels';
 import { Database } from '../../user/data';
@@ -9,18 +9,20 @@ export default class {
 
   // #region history
   @Channel(data.history.load)
-  static history_load() {
-    ipcMain.emit(data.history.load, this.database.GetVisitHistories());
+  static history_load(event: IpcMainEvent) {
+    const history = this.database.GetVisitHistories();
+    console.log('history', history);
+    event.sender.send(data.history.load, history);
   }
 
   @Channel(data.history.add)
-  static history_add(_event: Electron.IpcMainEvent, args: IVisitHistory) {
+  static history_add(_event: IpcMainEvent, args: IVisitHistory) {
     const result = this.database.AddVisitHistory(args);
     ipcMain.emit(data.history.add, result ? 'complete' : 'failure');
   }
 
   @Channel(data.history.remove)
-  static history_remove(_event: Electron.IpcMainEvent, args: string) {
+  static history_remove(_event: IpcMainEvent, args: string) {
     const result = this.database.RemoveVisitHistory(args);
     ipcMain.emit(data.history.add, result ? 'complete' : 'failure');
   }
@@ -33,13 +35,13 @@ export default class {
   }
 
   @Channel(data.bookmarks.add)
-  static bookmarks_add(_event: Electron.IpcMainEvent, args: IBookmark) {
+  static bookmarks_add(_event: IpcMainEvent, args: IBookmark) {
     const result = this.database.AddBookmark(args);
     ipcMain.emit(data.bookmarks.add, result ? 'complete' : 'failure');
   }
 
   @Channel(data.bookmarks.remove)
-  static bookmarks_remove(_event: Electron.IpcMainEvent, args: string) {
+  static bookmarks_remove(_event: IpcMainEvent, args: string) {
     const result = this.database.RemoveBookmark(args);
     ipcMain.emit(data.bookmarks.add, result ? 'complete' : 'failure');
   }
