@@ -9,12 +9,14 @@ export default class {
 
   @Channel(auth.login)
   static login(event: IpcMainEvent, args: IPassword) {
+    if (!this.library) this.library = new EasyAuth();
     const result = this.library.signIn(args.password);
     event.reply(auth.login, result ? 'complete' : 'failure');
   }
 
   @Channel(auth.join)
   static join(event: IpcMainEvent, args: IPassword) {
+    if (!this.library) this.library = new EasyAuth();
     const result = this.library.signup(args.password);
     event.reply(auth.join, result ? 'complete' : 'failure');
   }
