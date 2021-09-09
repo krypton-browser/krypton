@@ -1,5 +1,6 @@
 import { promises } from 'fs';
-import Authentication, { databasePath, shakeKey } from './auth';
+import Authentication, { databasePath as authPath, shakeKey } from './auth';
+import { databasePath as dataPath } from './data';
 
 const { unlink } = promises;
 
@@ -20,6 +21,7 @@ export default class EasyAuth extends Authentication {
   }
 
   public static async reset() {
-    await unlink(databasePath);
+    await unlink(dataPath);
+    await unlink(authPath);
   }
 }
