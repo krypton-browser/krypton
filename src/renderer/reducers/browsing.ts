@@ -90,7 +90,7 @@ export const browsingSlice = createSlice({
             ...tab,
             point: point + (mode === 'back' ? 1 : -1),
           };
-        } else console.log('pause');
+        }
         return false;
       });
       state.tabs = newTabs;

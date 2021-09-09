@@ -37,8 +37,11 @@ const Controller: React.FC = () => {
   const handleClickForwardSpace = () =>
     dispatch(moveSpace({ mode: 'forward' }));
   const handleClickReload = () => {
-    /* eslint-disable  @typescript-eslint/no-explicit-any */
-    console.log((document.querySelector(`#${currentTab}`) as any).reload());
+    /* eslint-disable-next-line  @typescript-eslint/no-explicit-any */
+    const target = document.querySelector(`#${currentTab}`) as any;
+    if (target) {
+      target.reload();
+    }
   };
   const handleAddBookmark = () => {
     const { stack, point, title } = selectTab({ id: currentTab, tabs });

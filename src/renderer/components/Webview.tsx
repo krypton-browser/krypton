@@ -48,8 +48,8 @@ const Webview = ({ id, url }: WebviewProps) => {
         }
       );
     }
-    // eslint-disable-next-line
   }, []);
+
   return (
     <webview
       id={id}
