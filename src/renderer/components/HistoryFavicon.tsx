@@ -6,7 +6,6 @@ type HistoryFaviconProps = {
 };
 
 const HistoryFavicon = ({ url }: HistoryFaviconProps) => {
-  console.log('url here', url);
   return (
     <div className={styles.url_icon_wrapper}>
       <img
