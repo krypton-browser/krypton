@@ -1,4 +1,5 @@
 import React, { useCallback, useEffect, useState } from 'react';
+import { v4 } from 'uuid';
 import isUrl from '../utils/isUrl';
 import styles from '../styles/controller.component.css';
 import reloadIcon from '../../../assets/images/reload-icon.svg';
@@ -7,9 +8,9 @@ import forwardSpaceIcon from '../../../assets/images/forwardspace-icon.svg';
 import bookmarkIcon from '../../../assets/images/star.svg';
 import settingMenuIcon from '../../../assets/images/setting-menu-icon.svg';
 import { browsingSlice } from '../reducers/browsing';
-
 import { useAppDispatch, useAppSelector } from '../configureStore';
-// import { addBookmarks } from "../actions/data";
+import { addBookmarks } from '../actions/data';
+import { selectTab } from '../utils/findTab';
 
 const { addUrl, moveSpace } = browsingSlice.actions;
 
@@ -37,15 +38,13 @@ const Controller: React.FC = () => {
     dispatch(moveSpace({ mode: 'forward' }));
   const handleClickReload = () => {};
   const handleAddBookmark = () => {
-    alert('개발 중인 기능입니다.');
+    const { stack, point, title } = selectTab({ id: currentTab, tabs });
+    dispatch(addBookmarks({ id: v4(), title, url: stack[point] }));
   };
 
   useEffect(() => {
-    tabs.forEach(({ id, stack, point }) => {
-      if (id !== currentTab) return true;
-      setUrlText(stack[point]);
-      return false;
-    });
+    const { stack, point } = selectTab({ id: currentTab, tabs });
+    setUrlText(stack[point]);
   }, [currentTab, tabs]);
 
   /* eslint-disable jsx-a11y/no-noninteractive-element-interactions */

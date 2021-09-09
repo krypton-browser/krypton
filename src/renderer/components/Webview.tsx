@@ -7,7 +7,7 @@ import { browsingSlice } from '../reducers/browsing';
 import styles from '../styles/webview.component.css';
 import { addHistory } from '../actions/data';
 
-const { updateTab } = browsingSlice.actions;
+const { addUrl, updateTab } = browsingSlice.actions;
 
 type WebviewProps = {
   readonly id: string;
@@ -22,12 +22,19 @@ const Webview = ({ id, url }: WebviewProps) => {
   useEffect(() => {
     if (webviewRef?.current) {
       const target = webviewRef.current as HTMLWebViewElement | any;
-      target.addEventListener('did-stop-loading', () => {
-        const currentURL = target.getURL();
-        if (url !== currentURL) {
-          console.log(url, currentURL);
-          // dispatch(addUrl({ id, url: currentURL }));
+      target.addEventListener('will-navigate', ({ url: willURL }: any) => {
+        if (url !== willURL) {
+          console.log(url, willURL);
+          dispatch(addUrl({ id, url: willURL }));
         }
+        dispatch(
+          addHistory({
+            id: v4(),
+            title: target.getTitle(),
+            url: willURL,
+            datetime: new Date().toString(),
+          })
+        );
       });
       target.addEventListener('page-favicon-updated', ({ favicons }: any) => {
         dispatch(updateTab({ id, favicon: favicons[0] }));
@@ -40,18 +47,9 @@ const Webview = ({ id, url }: WebviewProps) => {
           );
         }
       );
-      target.addEventListener('will-navigate', ({ url: willURL }: any) => {
-        dispatch(
-          addHistory({
-            id: v4(),
-            title: target.getTitle(),
-            url: willURL,
-            datetime: new Date().toString(),
-          })
-        );
-      });
     }
-  }, [dispatch, id, url]);
+    // eslint-disable-next-line
+  }, []);
   return (
     <webview
       id={id}
