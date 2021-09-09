@@ -9,7 +9,7 @@ import { HistoryProps } from '../types/props';
 
 const Login = ({ history }: HistoryProps) => {
   const dispatch = useAppDispatch();
-  const { loginDone } = useAppSelector((state) => state.auth);
+  const { loginDone, loginError } = useAppSelector((state) => state.auth);
   const [password, setPassword] = useState<string>('');
   const [isAction, setIsAction] = useState<boolean>(false);
 
@@ -20,9 +20,9 @@ const Login = ({ history }: HistoryProps) => {
     dispatch(login({ password }));
   };
   useEffect(() => {
-    if (isAction && loginDone) {
-      alert('로그인 성공!');
-      history.push('/');
+    if (isAction) {
+      if (loginDone) history.push('/');
+      if (loginError) alert('비밀번호가 올바르지 않습니다');
     }
     setIsAction(true);
   }, [history, isAction, loginDone]);

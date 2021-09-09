@@ -24,10 +24,11 @@ export default class {
   }
 
   @Channel(auth.check)
-  static check(event: IpcMainEvent, args: IPassword) {
+  static check(event: IpcMainEvent) {
     if (!this.library) this.library = new EasyAuth();
     const result = this.library.check();
-    event.reply(auth.join, response(result));
+    console.log(result);
+    event.reply(auth.check, response(result));
   }
 
   @Channel(auth.reset)

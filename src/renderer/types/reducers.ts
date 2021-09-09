@@ -13,7 +13,6 @@ export interface IBrowsingState {
 }
 
 export interface IAuthState {
-  key?: string | null;
   joinDone: boolean;
   joinLoading: boolean;
   joinError?: any;
