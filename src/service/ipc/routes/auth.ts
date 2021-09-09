@@ -23,6 +23,13 @@ export default class {
     event.reply(auth.join, response(result));
   }
 
+  @Channel(auth.check)
+  static check(event: IpcMainEvent, args: IPassword) {
+    if (!this.library) this.library = new EasyAuth();
+    const result = this.library.check();
+    event.reply(auth.join, response(result));
+  }
+
   @Channel(auth.reset)
   static async reset() {
     await EasyAuth.reset();

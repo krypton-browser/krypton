@@ -15,6 +15,10 @@ export default class EasyAuth extends Authentication {
     return this.CheckPassword(password);
   }
 
+  public check() {
+    return this.UsedBefore();
+  }
+
   public static async reset() {
     await unlink(databasePath);
   }
