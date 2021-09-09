@@ -1,4 +1,3 @@
-import { ipcMain } from 'electron';
 import Channel from '../ipc';
 import { data } from '../../../channels';
 import { Database } from '../../user/data';
@@ -28,20 +27,20 @@ export default class {
 
   // #region bookmarks
   @Channel(data.bookmarks.load)
-  static bookmarks_load() {
-    ipcMain.emit(data.bookmarks.load, this.database.GetBookmarks());
+  static bookmarks_load(event: Electron.IpcMainEvent) {
+    event.reply(data.bookmarks.load, this.database.GetBookmarks());
   }
 
   @Channel(data.bookmarks.add)
-  static bookmarks_add(_event: Electron.IpcMainEvent, args: IBookmark) {
+  static bookmarks_add(event: Electron.IpcMainEvent, args: IBookmark) {
     const result = this.database.AddBookmark(args);
-    ipcMain.emit(data.bookmarks.add, result ? 'complete' : 'failure');
+    event.reply(data.bookmarks.add, result ? 'complete' : 'failure');
   }
 
   @Channel(data.bookmarks.remove)
-  static bookmarks_remove(_event: Electron.IpcMainEvent, args: string) {
+  static bookmarks_remove(event: Electron.IpcMainEvent, args: string) {
     const result = this.database.RemoveBookmark(args);
-    ipcMain.emit(data.bookmarks.add, result ? 'complete' : 'failure');
+    event.reply(data.bookmarks.add, result ? 'complete' : 'failure');
   }
   // #endregion
 

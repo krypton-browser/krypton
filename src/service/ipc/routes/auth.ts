@@ -1,4 +1,3 @@
-import { ipcMain } from 'electron';
 import Channel from '../ipc';
 import { auth } from '../../../channels';
 import { IPassword } from '../../../types/auth';

@@ -1,4 +1,3 @@
-import { ipcMain } from 'electron';
 import Channel from '../ipc';
 import { setting } from '../../../channels';
 import { Database } from '../../user/data';
