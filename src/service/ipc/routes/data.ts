@@ -19,7 +19,8 @@ export default class {
     const result = this.database.AddVisitHistory(args)
       ? this.database.Save()
       : false;
-    event.reply(data.history.add, result ? 'complete' : 'failure');
+    console.log('result', result);
+    event.reply(data.history.add, result ? 'success' : 'failure');
   }
 
   @Channel(data.history.remove)

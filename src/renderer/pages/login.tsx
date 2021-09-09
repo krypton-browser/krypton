@@ -17,13 +17,11 @@ const Login = ({ history }: HistoryProps) => {
     console.log(e.target.value);
     setPassword(e.target.value);
   };
-
   const handleSubmitPassword = (e: FormEvent) => {
     e.preventDefault();
     console.log('submit!');
     dispatch(login({ password }));
   };
-
   useEffect(() => {
     if (isAction && loginDone) {
       alert('로그인 성공!');
@@ -45,7 +43,7 @@ const Login = ({ history }: HistoryProps) => {
           <div className={styles.bar_back}>
             <img src={lockImage} className={styles.lock_image} alt="dat" />
             <input
-              type="text"
+              type="password"
               className={styles.password}
               placeholder="비밀번호"
               onChange={handleChangePassword}

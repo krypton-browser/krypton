@@ -6,6 +6,7 @@ module.exports = {
     'import/prefer-default-export': 'off',
     'no-console': 'off',
     'no-alert': 'off',
+    'react-hooks/exhaustive-deps': 'off',
   },
   parserOptions: {
     ecmaVersion: 2020,

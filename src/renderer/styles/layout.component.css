@@ -12,7 +12,12 @@
 
 .page_wrapper {
   height: calc(100vh - 78px);
-  width: calc(100vw - 61px);
+  width: calc(100vw - 60px);
+}
+
+.is_sub_layout {
+  height: calc(100vh - 36px);
+  width: 100%;
 }
 
 .hex_image {

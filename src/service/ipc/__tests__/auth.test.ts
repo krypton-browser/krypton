@@ -1,5 +1,5 @@
 import { ipcRenderer } from 'electron';
-import path from 'path';
+// import path from 'path';
 import { auth } from '../../../channels';
 
 import '../routes/auth';

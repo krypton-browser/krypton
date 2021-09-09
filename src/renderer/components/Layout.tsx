@@ -1,4 +1,5 @@
 import React, { useEffect } from 'react';
+import classNames from 'classnames';
 import styles from '../styles/layout.component.css';
 import hex from '../../../assets/images/hex.svg';
 import Sidebar from './Sidebar';
@@ -15,7 +16,7 @@ const Layout: React.FC<React.ReactNode> = ({ children }) => {
     dispatch(loadHistory());
     dispatch(loadBookmarks());
     dispatch(loadSetting());
-  }, [dispatch]);
+  }, []);
   return (
     <div className={styles.layout_container}>
       <Frame />
@@ -31,14 +32,14 @@ const Layout: React.FC<React.ReactNode> = ({ children }) => {
 
 export default Layout;
 
-export const SubLayout: React.FC<React.ReactNode> = ({ children }) => {
-  return (
-    <div className={styles.layout_container}>
-      <SubFrame />
-      <main className={styles.main_container}>
-        <div className={styles.page_wrapper}>{children}</div>
-      </main>
-      <img className={styles.hex_image} src={hex} alt="hex" />
-    </div>
-  );
-};
+export const SubLayout: React.FC<React.ReactNode> = ({ children }) => (
+  <div className={styles.layout_container}>
+    <SubFrame />
+    <main className={styles.main_container}>
+      <div className={classNames(styles.page_wrapper, styles.is_sub_layout)}>
+        {children}
+      </div>
+    </main>
+    <img className={styles.hex_image} src={hex} alt="hex" />
+  </div>
+);

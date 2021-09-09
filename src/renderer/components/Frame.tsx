@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from 'react';
+import classNames from 'classnames';
 import closeIcon from '../../../assets/images/close-icon.svg';
 import minimizeIcon from '../../../assets/images/minimize-icon.svg';
 import maximizeIcon from '../../../assets/images/maximize-icon.svg';
@@ -82,7 +83,9 @@ export const SubFrame: React.FC = () => {
   return (
     <>
       <hr className={styles.side_line} />
-      <header className={styles.frame_container}>
+      <header
+        className={classNames(styles.frame_container, styles.is_sub_frame)}
+      >
         <div className={styles.frame_button_wrapper}>
           <button className={styles.button} type="button" onClick={minimize}>
             <img src={minimizeIcon} alt="minimize" className={styles.icon} />

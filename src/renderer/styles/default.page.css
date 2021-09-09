@@ -3,7 +3,7 @@
   height: 100%;
   display: flex;
   justify-content: center;
-  padding: 200px 30px 0 30px;
+  padding: 130px 0;
   text-align: center;
   animation: fadeIn 0.5s;
 }
@@ -21,10 +21,6 @@
   display: none;
 }
 
-.top_bar {
-  display: flex;
-}
-
 .duckduckgo {
   margin: 0 12px 0 0;
   height: 45px;
@@ -39,13 +35,14 @@
   background: #f3f3f3;
   position: relative;
   border-radius: 7px;
-  box-shadow: 0 6px 12px 0 rgba(0, 0, 0, 0.16);
+  box-shadow: 0 6px 8px 0 rgba(0, 0, 0, 0.16);
   padding: 0 10px;
 }
 
 .text_box {
   width: 100%;
   font-size: 20px;
+  letter-spacing: 0.4px;
   border: 0;
   background: none;
 }
@@ -76,7 +73,7 @@
 
 @media screen and (max-height: 600px) {
   .home_container {
-    padding: 100px 30px 0 30px;
+    padding: 100px 0;
   }
 }
 
