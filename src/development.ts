@@ -1,5 +1,4 @@
 import Authentication from './service/user/auth';
-import { Database, databasePath } from './service/user/data';
 
 console.log('development mode');
 

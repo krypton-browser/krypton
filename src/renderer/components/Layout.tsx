@@ -6,14 +6,13 @@ import Sidebar from './Sidebar';
 import Frame, { SubFrame } from './Frame';
 import Controller from './Controller';
 import { useAppDispatch } from '../configureStore';
-import { loadBookmarks, loadHistory } from '../actions/data';
+import { loadBookmarks } from '../actions/data';
 import { loadSetting } from '../actions/setting';
 
 // eslint-disable-next-line react/prop-types
 const Layout: React.FC<React.ReactNode> = ({ children }) => {
   const dispatch = useAppDispatch();
   useEffect(() => {
-    dispatch(loadHistory());
     dispatch(loadBookmarks());
     dispatch(loadSetting());
   }, []);

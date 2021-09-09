@@ -17,15 +17,15 @@ const Login = ({ history }: HistoryProps) => {
     setPassword(e.target.value);
   const handleSubmitPassword = (e: FormEvent) => {
     e.preventDefault();
+    setIsAction(true);
     dispatch(login({ password }));
   };
   useEffect(() => {
     if (isAction) {
       if (loginDone) history.push('/');
-      if (loginError) alert('비밀번호가 올바르지 않습니다');
+      if (loginError) alert('비밀번호가 올바르지 않습니다.');
     }
-    setIsAction(true);
-  }, [history, isAction, loginDone]);
+  }, [history, isAction, loginDone, loginError]);
 
   return (
     <SubLayout>
