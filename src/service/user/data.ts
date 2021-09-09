@@ -16,6 +16,8 @@ export interface SearchHistory {
 }
 
 export class Database {
+  static prettier = false;
+
   db: StormDB;
 
   constructor() {

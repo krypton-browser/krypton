@@ -5,6 +5,12 @@ import path from 'path';
 import EventEmitter from 'stream';
 import { userDataPath } from './data';
 
+function hex(size = 32) {
+  return [...Array(size)]
+    .map(() => Math.floor(Math.random() * 16).toString(16))
+    .join('');
+}
+
 export const databasePath = path.resolve(userDataPath, 'password.stormdb');
 const machineID = machineIdSync();
 
@@ -45,11 +51,11 @@ export default class Authentication extends EventEmitter {
     const engine = new StormDB.localFileEngine(databasePath, {
       serialize: (data: never) => {
         // encrypt and serialize data
-        return encrypt(JSON.stringify(data), machineID);
+        return encrypt(JSON.stringify(data), SHA256(machineID).toString());
       },
       deserialize: (data: string) => {
         // decrypt and deserialize data
-        const decrypted = decrypt(data, machineID);
+        const decrypted = decrypt(data, SHA256(machineID).toString());
         if (!decrypted && data) {
           this.emit('incorrect');
           this.onError = true;
@@ -75,7 +81,7 @@ export default class Authentication extends EventEmitter {
   public SetPassword(domain: string, encrypted: string): boolean {
     try {
       if (this.onError) throw new Error(ON_ERROR_MESSAGE);
-      this.db.set(Base64.encode(domain), encrypted);
+      this.db.set(SHA256(domain), encrypted);
       return true;
     } catch {
       return false;
@@ -85,7 +91,7 @@ export default class Authentication extends EventEmitter {
   public GetPassword(domain: string): string | boolean {
     try {
       if (this.onError) throw new Error(ON_ERROR_MESSAGE);
-      return this.db.get(Base64.encode(domain)).value() as unknown as string;
+      return this.db.get(SHA256(domain)).value() as unknown as string;
     } catch {
       return false;
     }
@@ -98,7 +104,10 @@ export default class Authentication extends EventEmitter {
   ): string | boolean {
     try {
       if (this.onError) throw new Error(ON_ERROR_MESSAGE);
-      this.db.set(Base64.encode(domain), encrypt(value, shakeKey(passphrase)));
+      this.db.set(
+        SHA256(domain),
+        encrypt(value, shakeKey(passphrase + domain))
+      );
       return true;
     } catch {
       return false;
@@ -109,9 +118,9 @@ export default class Authentication extends EventEmitter {
     try {
       if (this.onError) throw new Error(ON_ERROR_MESSAGE);
       const encrypted = this.db
-        .get(Base64.encode(domain))
+        .get(SHA256(domain))
         .value() as unknown as string;
-      return decrypt(encrypted, shakeKey(passphrase));
+      return decrypt(encrypted, shakeKey(passphrase + domain));
     } catch {
       return false;
     }
@@ -135,8 +144,9 @@ export default class Authentication extends EventEmitter {
     try {
       this.SetPassword(
         Base64.encode('_checker_'),
-        encrypt(SHA256(Math.random().toString()).toString(), encrypted)
+        encrypt(SHA256(hex(1024)).toString(), encrypted)
       );
+      // encrypt(SHA256(Math.random().toString()).toString(), encrypted)
       return true;
     } catch (err) {
       return false;
