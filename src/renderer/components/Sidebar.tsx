@@ -13,8 +13,7 @@ const Sidebar: React.FC = () => {
   const { history } = useAppSelector((state) => state.data);
   useEffect(() => {
     if (history) {
-      console.log(history.slice(0, 3));
-      setShowHistory(history.slice(0, 3));
+      setShowHistory([...history].reverse().slice(0, 3));
     }
   }, [history]);
   return (

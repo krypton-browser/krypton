@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react';
+import React, { useEffect, useState } from 'react';
 import {
   BrowserRouter as Router,
   Switch,
@@ -10,7 +10,7 @@ import Home from './pages/home';
 import Login from './pages/login';
 import { useAppDispatch } from './configureStore';
 import { browsingSlice } from './reducers/browsing';
-import { test } from '../channels';
+import { auth, test } from '../channels';
 import { ipcSender } from './utils/ipcSender';
 import Join from './pages/join';
 import History from './pages/history';
@@ -23,25 +23,34 @@ const { ipcRenderer } = window;
 const { initialize } = browsingSlice.actions;
 
 export default function App() {
+  const [isLoading, setIsLoading] = useState<boolean>(true);
+  const [isJoined, setIsJoined] = useState<boolean>(false);
   const dispatch = useAppDispatch();
   useEffect(() => {
     if (!ipcRenderer) console.log('IPC error...');
     (async () => {
+      setIsJoined((await ipcSender(auth.check)) === 'success');
       const res = await ipcSender(test.ping, { ping: 'hello' });
       console.log(res.pong);
+      setIsLoading(false);
     })();
     dispatch(initialize());
   }, [dispatch]);
   return (
-    <Router>
-      <Switch>
-        <Route path="/" component={Home} exact />
-        <Route path="/login" component={Login} exact />
-        <Route path="/join" component={Join} exact />
-        <Route path="/history" component={History} exact />
-        <Route path="/setting" component={Setting} exact />
-        <Route path="*" component={() => <Redirect to="/login" />} />
-      </Switch>
-    </Router>
+    !isLoading && (
+      <Router>
+        <Switch>
+          <Route path="/" component={Home} exact />
+          <Route path="/login" component={Login} exact />
+          <Route path="/join" component={Join} exact />
+          <Route path="/history" component={History} exact />
+          <Route path="/setting" component={Setting} exact />
+          <Route
+            path="*"
+            component={() => <Redirect to={isJoined ? '/login' : '/join'} />}
+          />
+        </Switch>
+      </Router>
+    )
   );
 }
