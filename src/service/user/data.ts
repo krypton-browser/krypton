@@ -90,7 +90,7 @@ export class Database {
 
   // #region History
   public GetVisitHistories(): Array<IVisitHistory> {
-    return this.db.get('visit-history').value() as Array<IVisitHistory>;
+    return (this.db.get('visit-history').value() as Array<IVisitHistory>) || [];
   }
 
   public AddVisitHistory(history: IVisitHistory): boolean {
