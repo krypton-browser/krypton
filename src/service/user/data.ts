@@ -53,7 +53,9 @@ export class Database {
 
   // #region SearchHistory
   public GetSearchHistories(): Array<SearchHistory> {
-    return this.db.get('search-history').value() as Array<SearchHistory>;
+    return (
+      (this.db.get('search-history').value() as Array<SearchHistory>) || []
+    );
   }
 
   public AddSearchHistory(history: SearchHistory): boolean {
