@@ -54,9 +54,13 @@ export class Database {
 
   // #region SearchHistory
   public GetSearchHistories(): Array<SearchHistory> {
-    return (
-      (this.db.get('search-history').value() as Array<SearchHistory>) || []
-    );
+    try {
+      return (
+        (this.db.get('search-history').value() as Array<SearchHistory>) || []
+      );
+    } catch {
+      return [];
+    }
   }
 
   public AddSearchHistory(history: SearchHistory): boolean {
@@ -93,7 +97,13 @@ export class Database {
 
   // #region History
   public GetVisitHistories(): Array<IVisitHistory> {
-    return (this.db.get('visit-history').value() as Array<IVisitHistory>) || [];
+    try {
+      return (
+        (this.db.get('visit-history').value() as Array<IVisitHistory>) || []
+      );
+    } catch {
+      return [];
+    }
   }
 
   public AddVisitHistory(history: IVisitHistory): boolean {
