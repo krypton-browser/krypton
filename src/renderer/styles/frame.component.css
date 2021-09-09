@@ -11,6 +11,10 @@
   z-index: -1;
 }
 
+.is_sub_frame {
+  justify-content: flex-end;
+}
+
 .frame_button_wrapper {
   display: flex;
 }

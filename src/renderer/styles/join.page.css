@@ -1,16 +1,27 @@
 .join_wrapper {
-  width: 100%;
+  width: 100vw;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
   text-align: center;
-  padding: 50px 0 0;
 }
 
-.logo {
-  width: 150px;
+.logo_wrapper {
+  display: flex;
+  align-items: center;
+  flex-direction: column;
+  margin: 0 0 30px;
 }
 
-.logo_text {
-  margin: 50px 0 0 0;
-  height: 50px;
+.logo_image {
+  width: 100px;
+}
+
+.logo_title {
+  margin: 30px 0 0;
+  width: 250px;
 }
 
 .top_bar {
@@ -25,23 +36,11 @@
   justify-content: center;
 }
 
-.bar_back {
+.submit_wrapper {
   display: flex;
   justify-content: space-between;
-  width: 50%;
-  height: 80px;
-  background: #efefef;
-  position: relative;
-  border-radius: 7px;
-  text-align: center;
-  box-shadow: 0 3px 10px -2px gray;
-}
-
-.start {
-  display: flex;
-  justify-content: space-between;
-  width: 30%;
-  height: 80px;
+  width: 300px;
+  height: 60px;
   background: #54adfd;
   position: relative;
   border-radius: 7px;
@@ -49,40 +48,71 @@
   box-shadow: 0 3px 4px -2px gray;
   align-items: center;
 }
-.start:before {
+.submit_wrapper:before {
   content: '';
   position: absolute;
-  left: -23px;
+  left: -21px;
   width: 0;
   height: 0;
-  border-bottom: 40px solid transparent;
-  border-top: 40px solid transparent;
+  border-bottom: 32px solid transparent;
+  border-top: 32px solid transparent;
   border-right: 26px solid #54adfd;
   border-radius: 7px;
 }
-.start:after {
+.submit_wrapper:after {
   content: '';
   position: absolute;
-  right: -23px;
+  right: -21px;
   width: 0;
   height: 0;
-  border-bottom: 40px solid transparent;
-  border-top: 40px solid transparent;
+  border-bottom: 32px solid transparent;
+  border-top: 32px solid transparent;
   border-left: 26px solid #54adfd;
   border-radius: 7px;
 }
 
+.pass_submit {
+  border: none;
+  background-color: #54adfd;
+  font-size: 23px;
+  letter-spacing: 0.8px;
+  width: 98%;
+  color: white;
+  height: 90%;
+  cursor: pointer;
+}
+
+.password_form {
+  width: 90%;
+  margin: 0 auto;
+  text-align: center;
+}
+
+.password_box_wrapper {
+  display: flex;
+  justify-content: space-between;
+  max-width: 600px;
+  height: 60px;
+  margin: 30px auto;
+  background: #efefef;
+  position: relative;
+  border-radius: 7px;
+  text-align: center;
+  box-shadow: 0 3px 10px -2px gray;
+}
+
 .password {
   margin: 0 20px 0 0;
-  font-size: 24px;
-  padding: 0;
+  font-size: 20px;
+  padding: 0 0 0 5px;
+  letter-spacing: 0.8px;
   border: 0;
-  width: 92%;
+  width: 100%;
   background-color: #efefef;
 }
 
 .lock_image {
-  width: 30px;
+  width: 25px;
   margin: 0 10px 0 15px;
 }
 
@@ -92,16 +122,4 @@
 
 .password::placeholder {
   color: #bebebe;
-}
-
-.pass_submit {
-  border: none;
-  background-color: #54adfd;
-  font-size: 30px;
-  width: 98%;
-  color: white;
-  height: 90%;
-}
-.pass_submit:hover {
-  cursor: pointer;
 }

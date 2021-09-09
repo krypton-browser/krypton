@@ -3,6 +3,7 @@ import Channel from '../ipc';
 import { data } from '../../../channels';
 import { Database } from '../../user/data';
 import { IBookmark, IVisitHistory } from '../../../types/browsing';
+import { response } from '../response';
 
 export default class {
   private static database: Database = new Database();
@@ -20,7 +21,7 @@ export default class {
     const result = this.database.AddVisitHistory(args)
       ? this.database.Save()
       : false;
-    event.reply(data.history.add, result ? 'complete' : 'failure');
+    event.reply(data.history.add, response(result));
   }
 
   @Channel(data.history.remove)
@@ -29,7 +30,7 @@ export default class {
     const result = this.database.RemoveVisitHistory(args)
       ? this.database.Save()
       : false;
-    event.reply(data.history.add, result ? 'complete' : 'failure');
+    event.reply(data.history.add, response(result));
   }
   // #endregion
 
@@ -46,7 +47,7 @@ export default class {
     const result = this.database.AddBookmark(args)
       ? this.database.Save()
       : false;
-    event.reply(data.bookmarks.add, result ? 'complete' : 'failure');
+    event.reply(data.bookmarks.add, response(result));
   }
 
   @Channel(data.bookmarks.remove)
@@ -55,7 +56,7 @@ export default class {
     const result = this.database.RemoveBookmark(args)
       ? this.database.Save()
       : false;
-    event.reply(data.bookmarks.add, result ? 'complete' : 'failure');
+    event.reply(data.bookmarks.add, response(result));
   }
   // #endregion
 

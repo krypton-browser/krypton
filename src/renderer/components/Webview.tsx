@@ -31,7 +31,7 @@ const Webview = ({ id, url }: WebviewProps) => {
           addHistory({
             id: v4(),
             title: target.getTitle(),
-            url: willURL,
+            url,
             datetime: new Date().toString(),
           })
         );
@@ -48,8 +48,8 @@ const Webview = ({ id, url }: WebviewProps) => {
         }
       );
     }
-    // eslint-disable-next-line
   }, []);
+
   return (
     <webview
       id={id}

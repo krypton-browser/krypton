@@ -15,6 +15,6 @@ export default class {
   @Channel(setting.set)
   static set(event: IpcMainEvent, args: ISettings) {
     const result = this.database.SetSettings(args);
-    event.reply(setting.set, result ? 'complete' : 'failure');
+    event.reply(setting.set, result ? 'success' : 'failure');
   }
 }

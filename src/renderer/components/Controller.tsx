@@ -28,15 +28,21 @@ const Controller: React.FC = () => {
       e.preventDefault();
       const url = isUrl(urlText)
         ? urlText
-        : `https://www.google.com/search?q=${encodeURI(urlText)}`;
-      dispatch(addUrl({ url }));
+        : `https://duckduckgo.com/?q=${encodeURI(urlText)}`;
+      dispatch(addUrl({ id: currentTab, url }));
     },
     [dispatch, urlText]
   );
   const handleClickBackSpace = () => dispatch(moveSpace({ mode: 'back' }));
   const handleClickForwardSpace = () =>
     dispatch(moveSpace({ mode: 'forward' }));
-  const handleClickReload = () => {};
+  const handleClickReload = () => {
+    /* eslint-disable-next-line  @typescript-eslint/no-explicit-any */
+    const target = document.querySelector(`#${currentTab}`) as any;
+    if (target) {
+      target.reload();
+    }
+  };
   const handleAddBookmark = () => {
     const { stack, point, title } = selectTab({ id: currentTab, tabs });
     dispatch(addBookmarks({ id: v4(), title, url: stack[point] }));

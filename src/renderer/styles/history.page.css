@@ -1,0 +1,132 @@
+a {
+  text-decoration: none;
+  color: black;
+  margin: 0;
+}
+
+.panel {
+  margin: 50px auto 0;
+  background-color: #efefef;
+  box-shadow: 0px 2px 10px 0 #bcbcbc;
+  border-radius: 10px;
+  width: 60%;
+  display: inline-block;
+  text-align: left;
+  padding-bottom: 40px;
+}
+
+.select {
+  font-size: 22px;
+  margin: 30px 0 0 30px;
+}
+
+.images {
+  height: 135px;
+  margin: 20px 0 0 50px;
+}
+
+.detail {
+  font-size: 22px;
+  margin: 50px 0 0 30px;
+}
+
+.detail_list {
+  display: block;
+  margin: 30px 0 0 0;
+}
+
+.detail_list_box {
+  margin: 0 auto;
+  font-size: 22px;
+  border-bottom: 1px solid #bebebe;
+  width: 90%;
+  justify-content: space-between;
+}
+
+.detail_text {
+  margin: 20px 0px 20px 10px;
+  width: 30%;
+}
+
+.detail_a {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.arrow {
+  margin: 0 20px 0 0;
+  width: 32px;
+  height: 32px;
+}
+
+.switch_button {
+  position: relative;
+  display: inline-block;
+  width: 55px;
+  height: 30px;
+}
+
+.switch_button input {
+  opacity: 0;
+  width: 0;
+  height: 0;
+}
+
+.onoff_switch {
+  position: absolute;
+  cursor: pointer;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  border-radius: 20px;
+  background-color: #ccc;
+  -webkit-transition: 0.4s;
+  transition: 0.4s;
+}
+
+.onoff_switch:before {
+  position: absolute;
+  content: '';
+  height: 22px;
+  width: 22px;
+  left: 4px;
+  bottom: 4px;
+  background-color: #fff;
+  -webkit-transition: 0.5s;
+  transition: 0.4s;
+  border-radius: 20px;
+}
+
+.switch_button input:checked + .onoff_switch {
+  background-color: #54adfd;
+}
+
+.switch_button input:checked + .onoff_switch:before {
+  -webkit-transform: translateX(26px);
+  -ms-transform: translateX(26px);
+  transform: translateX(26px);
+}
+
+.inline {
+  display: inline;
+  align-items: center;
+  margin: 20px 0 20px 0;
+}
+
+.visit_image {
+  height: 40px;
+  margin: 0 0 -10px 0;
+}
+
+.delete {
+  margin: 20px 20px 20px 0;
+  width: 20px;
+}
+
+.visit_text {
+  color: #bebebe;
+  font-size: 16px;
+  margin: 0 0 0 20px;
+}

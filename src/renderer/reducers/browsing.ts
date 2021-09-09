@@ -53,23 +53,6 @@ export const browsingSlice = createSlice({
       });
       state.tabs = newTabs;
     },
-    addURLSoft: (
-      state,
-      {
-        payload: { id: tabId, url },
-      }: PayloadAction<{
-        id: string;
-        url: string;
-      }>
-    ) => {
-      const newTabs = state.tabs;
-      state.tabs.forEach(({ id, stack, ...tab }, i): boolean => {
-        if (id !== tabId) return true;
-        newTabs[i] = { id, ...tab, stack: [url, ...stack] };
-        return false;
-      });
-      state.tabs = newTabs;
-    },
     addUrl: (
       state,
       {
@@ -78,17 +61,16 @@ export const browsingSlice = createSlice({
     ) => {
       const newTabs = state.tabs;
       state.tabs.forEach(({ id, point, stack, ...tab }, i): boolean => {
-        if ((tabId && tabId === id) || (!tabId && id === state.currentTab)) {
-          newTabs[i] = {
-            ...tab,
-            id,
-            url,
-            point: 0,
-            stack: [url, ...stack.slice(point)],
-          };
-          return false;
-        }
-        return true;
+        if (tabId !== id || url === stack[0]) return true;
+        if (url === stack[0]) return true;
+        newTabs[i] = {
+          ...tab,
+          id,
+          url,
+          point: 0,
+          stack: [url, ...stack.slice(point)],
+        };
+        return false;
       });
       state.tabs = newTabs;
     },
@@ -108,7 +90,7 @@ export const browsingSlice = createSlice({
             ...tab,
             point: point + (mode === 'back' ? 1 : -1),
           };
-        } else console.log('pause');
+        }
         return false;
       });
       state.tabs = newTabs;

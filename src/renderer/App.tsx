@@ -13,6 +13,8 @@ import { browsingSlice } from './reducers/browsing';
 import { test } from '../channels';
 import { ipcSender } from './utils/ipcSender';
 import Join from './pages/join';
+import History from './pages/history';
+import Setting from './pages/setting';
 
 const { ipcRenderer } = window;
 
@@ -36,7 +38,9 @@ export default function App() {
         <Route path="/" component={Home} exact />
         <Route path="/login" component={Login} exact />
         <Route path="/join" component={Join} exact />
-        <Route path="*" component={() => <Redirect to="/" />} />
+        <Route path="/history" component={History} exact />
+        <Route path="/setting" component={Setting} exact />
+        <Route path="*" component={() => <Redirect to="/login" />} />
       </Switch>
     </Router>
   );

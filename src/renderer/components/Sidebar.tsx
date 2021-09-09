@@ -1,31 +1,29 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
 import styles from '../styles/sidebar.component.css';
-import naverIcon from '../../../assets/images/naverbtn.svg';
-import googleIcon from '../../../assets/images/google_normal.svg';
 import bookmarkIcon from '../../../assets/images/star.svg';
 import settingIcon from '../../../assets/images/setting-icon.svg';
 import themeImageIcon from '../../../assets/images/theme_image-icon.svg';
+import { useAppSelector } from '../configureStore';
+import { IVisitHistory } from '../../types/browsing';
+import HistoryFavicon from './HistoryFavicon';
 
 const Sidebar: React.FC = () => {
+  const [showHistory, setShowHistory] = useState<IVisitHistory[]>([]);
+  const { history } = useAppSelector((state) => state.data);
+  useEffect(() => {
+    if (history) {
+      console.log(history.slice(0, 3));
+      setShowHistory(history.slice(0, 3));
+    }
+  }, [history]);
   return (
     <div className={styles.sidebar}>
       <div className={styles.latest_data_wrapper}>
-        <Link to="/">
-          <div className={styles.url_icon_wrapper}>
-            <img src={naverIcon} className={styles.icon} alt="" />
-          </div>
-        </Link>
-        <Link to="/">
-          <div className={styles.url_icon_wrapper}>
-            <img src={googleIcon} className={styles.icon} alt="latest web" />
-          </div>
-        </Link>
-        <Link to="/">
-          <div className={styles.url_icon_wrapper}>
-            <img src={googleIcon} className={styles.icon} alt="latest web" />
-          </div>
-        </Link>
+        {history &&
+          showHistory.map(({ id, url }) => (
+            <HistoryFavicon key={id} url={url} />
+          ))}
       </div>
       <div className={styles.menu_button_wrapper}>
         <Link to="/">
