@@ -89,7 +89,8 @@
       "provider": "github",
       "owner": "electron-react-boilerplate",
       "repo": "electron-react-boilerplate"
-    }
+    },
+    "asar": false
   },
   "repository": {
     "type": "git",

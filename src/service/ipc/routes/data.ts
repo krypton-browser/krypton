@@ -16,6 +16,7 @@ export default class {
   @Channel(data.history.add)
   static history_add(event: IpcMainEvent, args: IVisitHistory) {
     if (!this.database) this.database = new Database();
+    console.log(args);
     const result = this.database.AddVisitHistory(args)
       ? this.database.Save()
       : false;
