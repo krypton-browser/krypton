@@ -15,11 +15,13 @@ const Login = ({ history }: HistoryProps) => {
 
   const handleChangePassword = (e: ChangeEvent<HTMLInputElement>) =>
     setPassword(e.target.value);
+
   const handleSubmitPassword = (e: FormEvent) => {
     e.preventDefault();
     setIsAction(true);
     dispatch(login({ password }));
   };
+
   useEffect(() => {
     if (isAction) {
       if (loginDone) history.push('/');

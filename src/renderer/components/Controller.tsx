@@ -23,6 +23,7 @@ const Controller: React.FC = () => {
     (e) => setUrlText(e.target.value),
     []
   );
+
   const handleSubmitURLTextBox = useCallback(
     (e) => {
       e.preventDefault();
@@ -33,16 +34,19 @@ const Controller: React.FC = () => {
     },
     [dispatch, urlText]
   );
+
   const handleClickBackSpace = () => dispatch(moveSpace({ mode: 'back' }));
+
   const handleClickForwardSpace = () =>
     dispatch(moveSpace({ mode: 'forward' }));
-  const handleClickReload = () => {
+  const handleClickReload = useCallback(() => {
     /* eslint-disable-next-line  @typescript-eslint/no-explicit-any */
-    const target = document.querySelector(`#${currentTab}`) as any;
-    if (target) {
+    const target = document?.querySelector(`#${currentTab}`) as any;
+    if (target && target?.reload) {
       target.reload();
     }
-  };
+  }, [currentTab]);
+
   const handleAddBookmark = () => {
     const { stack, point, title } = selectTab({ id: currentTab, tabs });
     dispatch(addBookmarks({ id: v4(), title, url: stack[point] }));

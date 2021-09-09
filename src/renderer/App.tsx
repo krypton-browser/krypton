@@ -27,6 +27,7 @@ export default function App() {
   const [isLoading, setIsLoading] = useState<boolean>(true);
   const [isJoined, setIsJoined] = useState<boolean>(false);
   const dispatch = useAppDispatch();
+
   useEffect(() => {
     if (!ipcRenderer) console.log('IPC error...');
     (async () => {
@@ -38,6 +39,7 @@ export default function App() {
     dispatch(loadHistory());
     dispatch(initialize());
   }, [dispatch]);
+
   return (
     !isLoading && (
       <Router>

@@ -11,12 +11,13 @@ import HistoryFavicon from './HistoryFavicon';
 const Sidebar: React.FC = () => {
   const [showHistory, setShowHistory] = useState<IVisitHistory[]>([]);
   const { history } = useAppSelector((state) => state.data);
+
   useEffect(() => {
     if (history) {
-      console.log([...history].reverse().slice(0, 3));
       setShowHistory([...history].reverse().slice(0, 3));
     }
   }, [history]);
+
   return (
     <div className={styles.sidebar}>
       <div className={styles.latest_data_wrapper}>

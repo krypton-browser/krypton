@@ -9,13 +9,14 @@ import { useAppDispatch } from '../configureStore';
 import { loadBookmarks } from '../actions/data';
 import { loadSetting } from '../actions/setting';
 
-// eslint-disable-next-line react/prop-types
 const Layout: React.FC<React.ReactNode> = ({ children }) => {
   const dispatch = useAppDispatch();
+
   useEffect(() => {
     dispatch(loadBookmarks());
     dispatch(loadSetting());
   }, []);
+
   return (
     <div className={styles.layout_container}>
       <Frame />
