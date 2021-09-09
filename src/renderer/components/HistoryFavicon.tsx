@@ -15,4 +15,4 @@ const HistoryFavicon = ({ url }: HistoryFaviconProps) => (
   </div>
 );
 
-export default React.memo(HistoryFavicon);
+export default HistoryFavicon;

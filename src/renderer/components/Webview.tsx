@@ -24,14 +24,13 @@ const Webview = ({ id, url }: WebviewProps) => {
       const target = webviewRef.current as HTMLWebViewElement | any;
       target.addEventListener('will-navigate', ({ url: willURL }: any) => {
         if (url !== willURL) {
-          console.log(url, willURL);
           dispatch(addUrl({ id, url: willURL }));
         }
         dispatch(
           addHistory({
             id: v4(),
             title: target.getTitle(),
-            url,
+            url: willURL,
             datetime: new Date().toString(),
           })
         );

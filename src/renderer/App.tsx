@@ -15,6 +15,7 @@ import { ipcSender } from './utils/ipcSender';
 import Join from './pages/join';
 import History from './pages/history';
 import Setting from './pages/setting';
+import { loadHistory } from './actions/data';
 
 const { ipcRenderer } = window;
 
@@ -34,6 +35,7 @@ export default function App() {
       console.log(res.pong);
       setIsLoading(false);
     })();
+    dispatch(loadHistory());
     dispatch(initialize());
   }, [dispatch]);
   return (

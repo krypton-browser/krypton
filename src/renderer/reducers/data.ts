@@ -70,7 +70,7 @@ export const dataSlice = createSlice({
       .addCase(addHistory.fulfilled, (state, { payload }) => {
         state.addHistoryDone = true;
         state.addHistoryLoading = false;
-        state.history = [payload, ...state.history];
+        state.history = [...state.history, payload];
       })
       .addCase(addHistory.rejected, (state, { payload }) => {
         state.addHistoryLoading = false;

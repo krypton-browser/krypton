@@ -7,8 +7,13 @@ export const join = createAsyncThunk('auth/JOIN', async (data: IPassword) =>
   ipcSender(auth.join, data)
 );
 
-export const login = createAsyncThunk('auth/LOGIN', async (data: IPassword) =>
-  ipcSender(auth.login, data)
+export const login = createAsyncThunk(
+  'auth/LOGIN',
+  async (data: IPassword, { rejectWithValue }) => {
+    const res = (await ipcSender(auth.login, data)) === 'success';
+    if (res) return 'success';
+    return rejectWithValue('failure');
+  }
 );
 
 export const reset = createAsyncThunk('auth/RESET', async () =>
