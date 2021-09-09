@@ -26,17 +26,19 @@ const Webview = ({ id, url }: WebviewProps) => {
         if (url !== willURL) {
           dispatch(addUrl({ id, url: willURL }));
         }
+      });
+      target.addEventListener('page-favicon-updated', ({ favicons }: any) => {
+        dispatch(updateTab({ id, favicon: favicons[0] }));
+      });
+      target.addEventListener('dom-ready', () => {
         dispatch(
           addHistory({
             id: v4(),
             title: target.getTitle(),
-            url: willURL,
+            url: target.getURL(),
             datetime: new Date().toString(),
           })
         );
-      });
-      target.addEventListener('page-favicon-updated', ({ favicons }: any) => {
-        dispatch(updateTab({ id, favicon: favicons[0] }));
       });
       target.addEventListener(
         'page-title-updated',
