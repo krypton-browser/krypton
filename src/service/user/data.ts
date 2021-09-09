@@ -23,8 +23,9 @@ export class Database {
     const engine = new StormDB.localFileEngine(databasePath);
     this.db = new StormDB(engine);
     this.db.default({
-      searchhistory: [],
-      IHistory: [],
+      'search-history': [],
+      'visit-history': [],
+      bookmark: [],
       settings: {},
     });
   }

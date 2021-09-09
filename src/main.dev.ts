@@ -37,6 +37,8 @@ if (
   process.env.DEBUG_PROD === 'true'
 ) {
   require('electron-debug')();
+  // eslint-disable-next-line import/extensions
+  require('./development.ts');
 }
 
 const installExtensions = async () => {

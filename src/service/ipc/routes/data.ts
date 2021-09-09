@@ -16,14 +16,18 @@ export default class {
   @Channel(data.history.add)
   static history_add(event: IpcMainEvent, args: IVisitHistory) {
     if (!this.database) this.database = new Database();
-    const result = this.database.AddVisitHistory(args);
+    const result = this.database.AddVisitHistory(args)
+      ? this.database.Save()
+      : false;
     event.reply(data.history.add, result ? 'complete' : 'failure');
   }
 
   @Channel(data.history.remove)
   static history_remove(event: IpcMainEvent, args: string) {
     if (!this.database) this.database = new Database();
-    const result = this.database.RemoveVisitHistory(args);
+    const result = this.database.RemoveVisitHistory(args)
+      ? this.database.Save()
+      : false;
     event.reply(data.history.add, result ? 'complete' : 'failure');
   }
   // #endregion
@@ -38,14 +42,18 @@ export default class {
   @Channel(data.bookmarks.add)
   static bookmarks_add(event: IpcMainEvent, args: IBookmark) {
     if (!this.database) this.database = new Database();
-    const result = this.database.AddBookmark(args);
+    const result = this.database.AddBookmark(args)
+      ? this.database.Save()
+      : false;
     event.reply(data.bookmarks.add, result ? 'complete' : 'failure');
   }
 
   @Channel(data.bookmarks.remove)
   static bookmarks_remove(event: IpcMainEvent, args: string) {
     if (!this.database) this.database = new Database();
-    const result = this.database.RemoveBookmark(args);
+    const result = this.database.RemoveBookmark(args)
+      ? this.database.Save()
+      : false;
     event.reply(data.bookmarks.add, result ? 'complete' : 'failure');
   }
   // #endregion
