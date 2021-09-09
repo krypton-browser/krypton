@@ -38,6 +38,7 @@
       "node_modules/",
       "index.html",
       "main.prod.js",
+      "preload.js",
       "main.prod.js.map",
       "package.json"
     ],
