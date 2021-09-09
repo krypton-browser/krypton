@@ -13,20 +13,18 @@ const Login = ({ history }: HistoryProps) => {
   const [password, setPassword] = useState<string>('');
   const [isAction, setIsAction] = useState<boolean>(false);
 
-  const handleChangePassword = (e: ChangeEvent<HTMLInputElement>) => {
-    console.log(e.target.value);
+  const handleChangePassword = (e: ChangeEvent<HTMLInputElement>) =>
     setPassword(e.target.value);
-  };
   const handleSubmitPassword = (e: FormEvent) => {
     e.preventDefault();
-    console.log('submit!');
     dispatch(login({ password }));
   };
   useEffect(() => {
     if (isAction && loginDone) {
       alert('로그인 성공!');
       history.push('/');
-    } else setIsAction(true);
+    }
+    setIsAction(true);
   }, [history, isAction, loginDone]);
 
   return (

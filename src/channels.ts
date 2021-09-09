@@ -19,6 +19,7 @@ export const auth = {
   login: VALUE('AUTH', 'LOGIN'),
   join: VALUE('AUTH', 'JOIN'),
   reset: VALUE('AUTH', 'RESET'),
+  check: VALUE('AUTH', 'CHECK'),
 };
 
 export const browsing = {

@@ -40,7 +40,7 @@ export default function App() {
         <Route path="/join" component={Join} exact />
         <Route path="/history" component={History} exact />
         <Route path="/setting" component={Setting} exact />
-        <Route path="*" component={() => <Redirect to="/history" />} />
+        <Route path="*" component={() => <Redirect to="/login" />} />
       </Switch>
     </Router>
   );

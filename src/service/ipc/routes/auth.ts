@@ -12,6 +12,7 @@ export default class {
   static login(event: IpcMainEvent, args: IPassword) {
     if (!this.library) this.library = new EasyAuth();
     const result = this.library.signIn(args.password);
+    console.log(result);
     event.reply(auth.login, response(result));
   }
 

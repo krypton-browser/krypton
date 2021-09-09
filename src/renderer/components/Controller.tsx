@@ -28,7 +28,7 @@ const Controller: React.FC = () => {
       e.preventDefault();
       const url = isUrl(urlText)
         ? urlText
-        : `https://www.google.com/search?q=${encodeURI(urlText)}`;
+        : `https://duckduckgo.com/?q=${encodeURI(urlText)}`;
       dispatch(addUrl({ id: currentTab, url }));
     },
     [dispatch, urlText]
