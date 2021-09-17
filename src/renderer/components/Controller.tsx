@@ -12,7 +12,7 @@ import { useAppDispatch, useAppSelector } from '../configureStore';
 import { addBookmarks } from '../actions/data';
 import { selectTab } from '../utils/findTab';
 
-const { addUrl, moveSpace } = browsingSlice.actions;
+const { go, back, forward, reload } = browsingSlice.actions;
 
 const Controller: React.FC = () => {
   const { tabs, currentTab } = useAppSelector((state) => state.browsing);
@@ -30,31 +30,23 @@ const Controller: React.FC = () => {
       const url = isUrl(urlText)
         ? urlText
         : `https://duckduckgo.com/?q=${encodeURI(urlText)}`;
-      dispatch(addUrl({ id: currentTab, url }));
+      dispatch(go({ url }));
     },
     [dispatch, urlText]
   );
 
-  const handleClickBackSpace = () => dispatch(moveSpace({ mode: 'back' }));
-
-  const handleClickForwardSpace = () =>
-    dispatch(moveSpace({ mode: 'forward' }));
-  const handleClickReload = useCallback(() => {
-    /* eslint-disable-next-line  @typescript-eslint/no-explicit-any */
-    const target = document?.querySelector(`#${currentTab}`) as any;
-    if (target && target?.reload) {
-      target.reload();
-    }
-  }, [currentTab]);
-
+  const handleClickGoBack = () => dispatch(back());
+  const handleClickGoForward = () => dispatch(forward());
+  const handleClickReload = () => dispatch(reload());
   const handleAddBookmark = () => {
-    const { stack, point, title } = selectTab({ id: currentTab, tabs });
-    dispatch(addBookmarks({ id: v4(), title, url: stack[point] }));
+    const { title, url } = selectTab({ id: currentTab, tabs });
+    dispatch(addBookmarks({ id: v4(), title, url }));
   };
 
   useEffect(() => {
-    const { stack, point } = selectTab({ id: currentTab, tabs });
-    setUrlText(stack[point]);
+    const { url } = selectTab({ id: currentTab, tabs });
+    console.log('current', url);
+    setUrlText(url);
   }, [currentTab, tabs]);
 
   /* eslint-disable jsx-a11y/no-noninteractive-element-interactions */
@@ -64,14 +56,14 @@ const Controller: React.FC = () => {
         <button
           type="button"
           className={styles.button}
-          onClick={handleClickBackSpace}
+          onClick={handleClickGoBack}
         >
           <img src={backspaceIcon} alt="backspace" className={styles.icon} />
         </button>
         <button
           type="button"
           className={styles.button}
-          onClick={handleClickForwardSpace}
+          onClick={handleClickGoForward}
         >
           <img
             src={forwardSpaceIcon}

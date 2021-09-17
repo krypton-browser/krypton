@@ -1,13 +1,11 @@
 /* eslint-disable  @typescript-eslint/no-explicit-any */
 
 import React, { useEffect, useRef } from 'react';
-import { v4 } from 'uuid';
 import { useAppDispatch, useAppSelector } from '../configureStore';
 import { browsingSlice } from '../reducers/browsing';
 import styles from '../styles/webview.component.css';
-import { addHistory } from '../actions/data';
 
-const { addUrl, updateTab } = browsingSlice.actions;
+const { updateTab } = browsingSlice.actions;
 
 type WebviewProps = {
   readonly id: string;
@@ -22,23 +20,18 @@ const Webview = ({ id, url }: WebviewProps) => {
   useEffect(() => {
     if (webviewRef?.current) {
       const target = webviewRef.current as HTMLWebViewElement | any;
-      target.addEventListener('will-navigate', ({ url: willURL }: any) => {
-        if (url !== willURL) {
-          dispatch(addUrl({ id, url: willURL }));
-        }
+      target.addEventListener('did-navigate', ({ url: willURL }: any) => {
+        dispatch(
+          updateTab({
+            id,
+            url: willURL,
+            canGoBack: target.canGoBack,
+            canGoForward: target.canGoForward,
+          })
+        );
       });
       target.addEventListener('page-favicon-updated', ({ favicons }: any) => {
         dispatch(updateTab({ id, favicon: favicons[0] }));
-      });
-      target.addEventListener('dom-ready', () => {
-        dispatch(
-          addHistory({
-            id: v4(),
-            title: target.getTitle(),
-            url: target.getURL(),
-            datetime: new Date().toString(),
-          })
-        );
       });
       target.addEventListener(
         'page-title-updated',
@@ -53,7 +46,7 @@ const Webview = ({ id, url }: WebviewProps) => {
 
   return (
     <webview
-      id={id}
+      id={`webview_${id}`}
       ref={webviewRef}
       allowFullScreen={true as boolean}
       allowpopups={true as boolean}

@@ -17,8 +17,8 @@ const TabContainer: React.FC = () => {
 
   return (
     <div className={styles.container}>
-      {tabs.map(({ id, stack, point, title, favicon }) => (
-        <Tab key={id} id={id} title={title ?? stack[point]} favicon={favicon} />
+      {tabs.map(({ id, url, title, favicon }) => (
+        <Tab key={id} id={id} title={title ?? url} favicon={favicon} />
       ))}
       {/* eslint-disable-next-line react/button-has-type */}
       <button className={styles.add_tab_button} onClick={handleAddTab}>

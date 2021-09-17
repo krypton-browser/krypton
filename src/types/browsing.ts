@@ -1,11 +1,13 @@
-export type ITab = {
+export type WebviewTable = { [id: string]: string };
+
+export interface ITab {
   id: string;
   url: string;
   title: string;
   favicon: string;
-  point: number;
-  stack: string[];
-};
+  canGoBack: boolean;
+  canGoForward: boolean;
+}
 
 export interface IBookmark {
   id: string;

@@ -1,10 +1,16 @@
 /* eslint-disable  @typescript-eslint/no-explicit-any */
 
-import { IBookmark, IVisitHistory, ITab } from '../../types/browsing';
+import {
+  IBookmark,
+  IVisitHistory,
+  ITab,
+  WebviewTable,
+} from '../../types/browsing';
 import { ISettings } from '../../types/setting';
 
 export interface IBrowsingState {
   tabs: ITab[];
+  webviewTable: WebviewTable;
   currentTab: string;
   isPhishingSite: boolean;
   loadPhishingSiteCheckDone: boolean;

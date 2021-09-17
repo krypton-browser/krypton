@@ -1,10 +1,12 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit';
+import { WebviewTag } from 'electron';
 import { IBrowsingState } from '../types/reducers';
 import { initialTab } from '../constants/browsing';
 import { loadPhishingSiteCheck } from '../actions/browsing';
 
 const initialState: IBrowsingState = {
-  tabs: [initialTab()],
+  tabs: [],
+  webviewTable: {},
   currentTab: '',
   isPhishingSite: false,
   loadPhishingSiteCheckDone: false,
@@ -17,15 +19,19 @@ export const browsingSlice = createSlice({
   initialState,
   reducers: {
     initialize: (state) => {
-      state.currentTab = state.tabs[0].id;
+      const tab = initialTab();
+      state.tabs = [tab];
+      state.currentTab = tab.id;
+      state.webviewTable = { [tab.id]: '' };
     },
-    moveTab: (state, { payload }: PayloadAction<{ id: string }>) => {
-      state.currentTab = payload.id;
+    moveTab: (state, { payload: { id } }: PayloadAction<{ id: string }>) => {
+      state.currentTab = id;
     },
     addTab: (state) => {
       const newTab = initialTab();
       state.tabs = [...state.tabs, newTab];
       state.currentTab = newTab.id;
+      state.webviewTable = { ...state.webviewTable, [newTab.id]: '' };
     },
     removeTab: (state, { payload }: PayloadAction<{ id: string }>) => {
       const tabs = state.tabs.filter(({ id }) => id !== payload.id);
@@ -33,6 +39,9 @@ export const browsingSlice = createSlice({
       if (payload.id === state.currentTab) {
         state.currentTab = tabs[tabs.length - 1].id;
       }
+      const webview = state.webviewTable;
+      delete webview[payload.id];
+      state.webviewTable = webview;
     },
     updateTab: (
       state,
@@ -43,6 +52,8 @@ export const browsingSlice = createSlice({
         url?: string;
         favicon?: string;
         title?: string;
+        canGoBack?: boolean;
+        canGoForward?: boolean;
       }>
     ) => {
       const newTabs = state.tabs;
@@ -53,47 +64,26 @@ export const browsingSlice = createSlice({
       });
       state.tabs = newTabs;
     },
-    addUrl: (
-      state,
-      {
-        payload: { id: tabId, url },
-      }: PayloadAction<{ id?: string; url: string }>
-    ) => {
-      const newTabs = state.tabs;
-      state.tabs.forEach(({ id, point, stack, ...tab }, i): boolean => {
-        if (tabId !== id || url === stack[0]) return true;
-        if (url === stack[0]) return true;
-        newTabs[i] = {
-          ...tab,
-          id,
-          url,
-          point: 0,
-          stack: [url, ...stack.slice(point)],
-        };
-        return false;
-      });
-      state.tabs = newTabs;
+    go: (state, { payload: { url } }: PayloadAction<{ url: string }>) => {
+      state.webviewTable = { ...state.webviewTable, [state.currentTab]: url };
     },
-    moveSpace: (
-      state,
-      { payload: { mode } }: PayloadAction<{ mode: 'back' | 'forward' }>
-    ) => {
-      const newTabs = state.tabs;
-      state.tabs.forEach(({ id, point, ...tab }, i): boolean => {
-        if (id !== state.currentTab) return true;
-        if (
-          (mode === 'forward' && point > 0) ||
-          (mode === 'back' && point + 1 < tab.stack.length)
-        ) {
-          newTabs[i] = {
-            id,
-            ...tab,
-            point: point + (mode === 'back' ? 1 : -1),
-          };
-        }
-        return false;
-      });
-      state.tabs = newTabs;
+    back: (state) => {
+      const webview: WebviewTag | null = document?.querySelector(
+        `#webview_${state.currentTab}`
+      );
+      webview?.goBack();
+    },
+    forward: (state) => {
+      const webview: WebviewTag | null = document?.querySelector(
+        `#webview_${state.currentTab}`
+      );
+      webview?.goForward();
+    },
+    reload: (state) => {
+      const webview: WebviewTag | null = document?.querySelector(
+        `#webview_${state.currentTab}`
+      );
+      webview?.reload();
     },
   },
   extraReducers: (builder) =>

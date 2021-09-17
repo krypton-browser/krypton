@@ -13,7 +13,7 @@ type DefaultProps = {
   id: string;
 };
 
-const { addUrl } = browsingSlice.actions;
+const { go } = browsingSlice.actions;
 
 const Default = ({ id }: DefaultProps) => {
   const dispatch = useAppDispatch();
@@ -30,7 +30,7 @@ const Default = ({ id }: DefaultProps) => {
       const url = isUrl(urlText)
         ? urlText
         : `https://duckduckgo.com/?q=${encodeURI(urlText)}`;
-      dispatch(addUrl({ id: currentTab, url }));
+      dispatch(go({ url }));
     },
     [dispatch, urlText]
   );

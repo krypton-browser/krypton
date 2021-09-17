@@ -6,7 +6,7 @@
   "main": "./main.prod.js",
   "author": {
     "name": "Electron React Boilerplate Maintainers",
-    "email": "electronreactboilerplate@gmail.com",
+    "email": "to@khjcode.com",
     "url": "https://github.com/electron-react-boilerplate"
   },
   "scripts": {

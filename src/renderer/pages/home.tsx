@@ -5,14 +5,14 @@ import { useAppSelector } from '../configureStore';
 import Webview from '../components/Webview';
 
 const Home: React.FC = () => {
-  const { tabs } = useAppSelector((state) => state.browsing);
+  const { webviewTable } = useAppSelector((state) => state.browsing);
   return (
     <Layout>
-      {tabs.map(({ id, stack, point }) =>
-        stack[point] === '' ? (
+      {Object.entries(webviewTable).map(([id, url]) =>
+        url === '' ? (
           <Default key={id} id={id} />
         ) : (
-          <Webview key={id} id={id} url={stack[point]} />
+          <Webview key={id} id={id} url={url} />
         )
       )}
     </Layout>
