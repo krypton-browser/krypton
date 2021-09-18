@@ -40,8 +40,10 @@ export const browsingSlice = createSlice({
         state.currentTab = tabs[tabs.length - 1].id;
       }
       const webview = state.webviewTable;
-      delete webview[payload.id];
-      state.webviewTable = webview;
+      if (webview[payload.id]) {
+        delete webview[payload.id];
+        state.webviewTable = webview;
+      }
     },
     updateTab: (
       state,
@@ -56,6 +58,7 @@ export const browsingSlice = createSlice({
         canGoForward?: boolean;
       }>
     ) => {
+      console.log('payload', data);
       const newTabs = state.tabs;
       state.tabs.forEach(({ id, ...tab }, i): boolean => {
         if (id !== tabId) return true;
@@ -67,13 +70,13 @@ export const browsingSlice = createSlice({
     go: (state, { payload: { url } }: PayloadAction<{ url: string }>) => {
       state.webviewTable = { ...state.webviewTable, [state.currentTab]: url };
     },
-    back: (state) => {
+    goBack: (state) => {
       const webview: WebviewTag | null = document?.querySelector(
         `#webview_${state.currentTab}`
       );
       webview?.goBack();
     },
-    forward: (state) => {
+    goForward: (state) => {
       const webview: WebviewTag | null = document?.querySelector(
         `#webview_${state.currentTab}`
       );

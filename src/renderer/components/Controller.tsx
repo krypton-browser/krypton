@@ -3,27 +3,30 @@ import { v4 } from 'uuid';
 import isUrl from '../utils/isUrl';
 import styles from '../styles/controller.component.css';
 import reloadIcon from '../../../assets/images/reload-icon.svg';
-import backspaceIcon from '../../../assets/images/backspace-icon.svg';
-import forwardSpaceIcon from '../../../assets/images/forwardspace-icon.svg';
 import bookmarkIcon from '../../../assets/images/star.svg';
 import settingMenuIcon from '../../../assets/images/setting-menu-icon.svg';
 import { browsingSlice } from '../reducers/browsing';
 import { useAppDispatch, useAppSelector } from '../configureStore';
 import { addBookmarks } from '../actions/data';
 import { selectTab } from '../utils/findTab';
+import GoForwardIcon from './GoForwardIcon';
+import GoBackIcon from './GoBackIcon';
 
-const { go, back, forward, reload } = browsingSlice.actions;
+const { go, goBack, goForward, reload } = browsingSlice.actions;
 
 const Controller: React.FC = () => {
-  const { tabs, currentTab } = useAppSelector((state) => state.browsing);
-  const [urlText, setUrlText] = useState<string>('');
   const dispatch = useAppDispatch();
+  const { tabs, currentTab, webviewTable } = useAppSelector(
+    (state) => state.browsing
+  );
+  const [urlText, setUrlText] = useState<string>('');
+  const [canGoBack, setCanGoBack] = useState<boolean>(false);
+  const [canGoForward, setCanGoForward] = useState<boolean>(false);
 
   const handleChangeURLTextBox = useCallback(
     (e) => setUrlText(e.target.value),
     []
   );
-
   const handleSubmitURLTextBox = useCallback(
     (e) => {
       e.preventDefault();
@@ -34,9 +37,8 @@ const Controller: React.FC = () => {
     },
     [dispatch, urlText]
   );
-
-  const handleClickGoBack = () => dispatch(back());
-  const handleClickGoForward = () => dispatch(forward());
+  const handleClickGoBack = () => dispatch(goBack());
+  const handleClickGoForward = () => dispatch(goForward());
   const handleClickReload = () => dispatch(reload());
   const handleAddBookmark = () => {
     const { title, url } = selectTab({ id: currentTab, tabs });
@@ -44,12 +46,20 @@ const Controller: React.FC = () => {
   };
 
   useEffect(() => {
-    const { url } = selectTab({ id: currentTab, tabs });
-    console.log('current', url);
-    setUrlText(url);
+    const {
+      url,
+      canGoBack: CanGoBack,
+      canGoForward: CanGoForward,
+    } = selectTab({
+      id: currentTab,
+      tabs,
+    });
+    setCanGoBack(CanGoBack);
+    setCanGoForward(CanGoForward);
+    if (webviewTable[currentTab] === '') setUrlText('');
+    else setUrlText(url);
   }, [currentTab, tabs]);
 
-  /* eslint-disable jsx-a11y/no-noninteractive-element-interactions */
   return (
     <div className={styles.controller}>
       <div className={styles.button_wrapper}>
@@ -58,18 +68,14 @@ const Controller: React.FC = () => {
           className={styles.button}
           onClick={handleClickGoBack}
         >
-          <img src={backspaceIcon} alt="backspace" className={styles.icon} />
+          <GoBackIcon enabled={canGoBack} />
         </button>
         <button
           type="button"
           className={styles.button}
           onClick={handleClickGoForward}
         >
-          <img
-            src={forwardSpaceIcon}
-            alt="forwardSpace"
-            className={styles.icon}
-          />
+          <GoForwardIcon enabled={canGoForward} />
         </button>
         <button
           type="button"

@@ -55,7 +55,6 @@ export const dataSlice = createSlice({
       .addCase(loadHistory.fulfilled, (state, { payload }) => {
         state.loadHistoryDone = true;
         state.loadHistoryLoading = false;
-        console.log(payload);
         state.history = payload;
       })
       .addCase(loadHistory.rejected, (state, { payload }) => {

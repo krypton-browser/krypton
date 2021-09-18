@@ -38,8 +38,8 @@
 
 .button {
   box-sizing: border-box;
-  width: 30px;
-  height: 30px;
+  width: 30px !important;
+  height: 30px !important;
   margin: 0 3px;
   border: none;
   background: none;

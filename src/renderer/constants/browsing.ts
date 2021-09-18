@@ -1,11 +1,13 @@
 import { v4 } from 'uuid';
 import { IBookmark, IVisitHistory, ITab } from '../../types/browsing';
 
+export const defaultFavicon = 'http://images.sinopoda.com/favicon.svg';
+
 export const initialTab = (): ITab => ({
   id: v4(),
   url: '',
   title: '새 탭',
-  favicon: 'http://images.sinopoda.com/favicon.svg',
+  favicon: defaultFavicon,
   canGoBack: false,
   canGoForward: false,
 });

@@ -21,10 +21,13 @@ const Sidebar: React.FC = () => {
   return (
     <div className={styles.sidebar}>
       <div className={styles.latest_data_wrapper}>
-        {history &&
-          showHistory.map(({ id, url }) => (
-            <HistoryFavicon key={id} url={url} />
-          ))}
+        {showHistory.length && (
+          <>
+            <HistoryFavicon key={showHistory[0].id} url={showHistory[0].url} />
+            <HistoryFavicon key={showHistory[1].id} url={showHistory[1].url} />
+            <HistoryFavicon key={showHistory[2].id} url={showHistory[2].url} />
+          </>
+        )}
       </div>
       <div className={styles.menu_button_wrapper}>
         <Link to="/">
