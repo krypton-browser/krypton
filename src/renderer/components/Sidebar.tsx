@@ -23,9 +23,24 @@ const Sidebar: React.FC = () => {
       <div className={styles.latest_data_wrapper}>
         {showHistory.length && (
           <>
-            <HistoryFavicon key={showHistory[0].id} url={showHistory[0].url} />
-            <HistoryFavicon key={showHistory[1].id} url={showHistory[1].url} />
-            <HistoryFavicon key={showHistory[2].id} url={showHistory[2].url} />
+            {showHistory[0] && (
+              <HistoryFavicon
+                key={showHistory[0].id}
+                url={showHistory[0].url}
+              />
+            )}
+            {showHistory[1] && (
+              <HistoryFavicon
+                key={showHistory[1].id}
+                url={showHistory[1].url}
+              />
+            )}
+            {showHistory[2] && (
+              <HistoryFavicon
+                key={showHistory[2].id}
+                url={showHistory[2].url}
+              />
+            )}
           </>
         )}
       </div>

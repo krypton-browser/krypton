@@ -4,10 +4,12 @@
   stroke-miterlimit: 10;
 }
 
-.enabled {
+.enabled,
+.enabled .cls-1 {
   stroke: #3d3d3d;
 }
 
-.disabled {
+.disabled,
+.disabled .cls-1 {
   stroke: #d1d5d9;
 }
