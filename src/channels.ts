@@ -20,6 +20,10 @@ export const auth = {
   join: VALUE('AUTH', 'JOIN'),
   reset: VALUE('AUTH', 'RESET'),
   check: VALUE('AUTH', 'CHECK'),
+  pwdStore: {
+    get: VALUE('AUTH', 'PWDSTORE', 'GET'),
+    set: VALUE('AUTH', 'PWDSTORE', 'SET'),
+  },
 };
 
 export const browsing = {
