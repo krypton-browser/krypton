@@ -1,16 +1,19 @@
 import React, { useCallback, useEffect, useState } from 'react';
 import { v4 } from 'uuid';
+import {
+  MdArrowBack,
+  MdArrowForward,
+  MdRefresh,
+  MdOutlineStarOutline,
+  MdOutlineWidgets,
+} from 'react-icons/md';
+import classNames from 'classnames';
 import isUrl from '../utils/isUrl';
 import styles from '../styles/controller.component.css';
-import reloadIcon from '../../../assets/images/reload-icon.svg';
-import bookmarkIcon from '../../../assets/images/star.svg';
-import settingMenuIcon from '../../../assets/images/setting-menu-icon.svg';
 import { browsingSlice } from '../reducers/browsing';
 import { useAppDispatch, useAppSelector } from '../configureStore';
 import { addBookmarks } from '../actions/data';
 import { selectTab } from '../utils/findTab';
-import GoForwardIcon from './GoForwardIcon';
-import GoBackIcon from './GoBackIcon';
 
 const { go, goBack, goForward, reload } = browsingSlice.actions;
 
@@ -63,27 +66,21 @@ const Controller: React.FC = () => {
   return (
     <div className={styles.controller}>
       <div className={styles.button_wrapper}>
-        <button
-          type="button"
-          className={styles.button}
+        <MdArrowBack
+          className={classNames(
+            styles.button,
+            canGoForward ? styles.enabled : styles.disabled
+          )}
           onClick={handleClickGoBack}
-        >
-          <GoBackIcon enabled={canGoBack} />
-        </button>
-        <button
-          type="button"
-          className={styles.button}
+        />
+        <MdArrowForward
+          className={classNames(
+            styles.button,
+            canGoBack ? styles.enabled : styles.disabled
+          )}
           onClick={handleClickGoForward}
-        >
-          <GoForwardIcon enabled={canGoForward} />
-        </button>
-        <button
-          type="button"
-          className={styles.button}
-          onClick={handleClickReload}
-        >
-          <img src={reloadIcon} alt="reload" className={styles.icon} />
-        </button>
+        />
+        <MdRefresh className={styles.button} onClick={handleClickReload} />
       </div>
       <form
         autoComplete="off"
@@ -100,20 +97,11 @@ const Controller: React.FC = () => {
         />
       </form>
       <div className={styles.button_wrapper}>
-        <button
-          type="button"
+        <MdOutlineStarOutline
           className={styles.button}
           onClick={handleAddBookmark}
-        >
-          <img src={bookmarkIcon} alt="bookmark" className={styles.icon} />
-        </button>
-        <button type="button" className={styles.button}>
-          <img
-            src={settingMenuIcon}
-            alt="setting menu"
-            className={styles.icon}
-          />
-        </button>
+        />
+        <MdOutlineWidgets className={styles.button} />
       </div>
     </div>
   );

@@ -32,7 +32,7 @@
 }
 
 .button_wrapper {
-  padding: 0 10px 0 8px;
+  padding: 0 8px 0 6px;
   display: flex;
 }
 
@@ -43,19 +43,22 @@
   margin: 0 3px;
   border: none;
   background: none;
-  display: flex;
-  align-items: center;
-  justify-content: center;
   transition: 0.3s;
   border-radius: 100%;
+  padding: 4px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
 .button:focus {
   outline: none;
 }
 .button:hover {
-  background: rgba(0, 0, 0, 0.03);
+  background: rgba(0, 0, 0, 0.04);
 }
-
-.icon {
-  height: 15px;
+.enabled {
+  color: rgb(0, 0, 0);
+}
+.disabled {
+  color: rgba(0, 0, 0, 0.4);
 }

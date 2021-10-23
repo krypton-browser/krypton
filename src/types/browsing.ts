@@ -7,6 +7,7 @@ export interface ITab {
   favicon: string;
   canGoBack: boolean;
   canGoForward: boolean;
+  isDefault: boolean;
 }
 
 export interface IBookmark {
