@@ -1,4 +1,6 @@
+import axios from 'axios';
 import electron from 'electron';
+import { readFile, writeFile } from 'fs/promises';
 import path from 'path';
 import StormDB from 'stormdb';
 import { IBookmark, IVisitHistory } from '../../types/browsing';
@@ -105,6 +107,34 @@ export class Database {
       );
     } catch {
       return [];
+    }
+  }
+
+  public static async SaveVisitHistoryFavicon(
+    faviconUrl: string
+  ): Promise<string | null> {
+    try {
+      const fname = [...Array(64)]
+        .map(() => Math.floor(Math.random() * 16).toString(16))
+        .join('');
+      await axios({
+        url: faviconUrl,
+      }).then((x) =>
+        writeFile(path.resolve(userDataPath, 'favicon', fname), x.data)
+      );
+      return fname;
+    } catch {
+      return null;
+    }
+  }
+
+  public static async GetVisitHistoryFavicon(
+    hexId: string
+  ): Promise<Buffer | null> {
+    try {
+      return await readFile(path.resolve(userDataPath, 'favicon', hexId));
+    } catch {
+      return null;
     }
   }
 

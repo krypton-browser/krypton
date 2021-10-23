@@ -18,6 +18,7 @@ export interface IBookmark {
 
 export interface IVisitHistory extends IBookmark {
   datetime: string;
+  faviconPath: string; // SaveVisitHistoryFavicon 함수의 반환값
 }
 
 export interface ISearchHistory {
