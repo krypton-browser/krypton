@@ -53,9 +53,7 @@ export const removeBookmarks = createAsyncThunk(
   async (payload: { id: string }, { rejectWithValue }) => {
     if (payload.id) {
       const res = await ipcSender(data.bookmarks.remove, payload);
-      if (res === 'success') {
-        return payload;
-      }
+      if (res === 'success') return payload;
     }
     return rejectWithValue('failure');
   }

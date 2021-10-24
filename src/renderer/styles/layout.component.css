@@ -16,8 +16,15 @@
 }
 
 .is_sub_layout {
-  height: calc(100vh - 36px);
-  width: 100%;
+  height: calc(100vh - 36px) !important;
+  width: 100% !important;
+  overflow-x: hidden;
+  overflow-y: scroll;
+  -ms-overflow-style: none;
+  scrollbar-width: none;
+}
+.is_sub_layout::-webkit-scrollbar {
+  display: none;
 }
 
 .hex_image {
