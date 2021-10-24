@@ -1,6 +1,6 @@
 import axios from 'axios';
 import electron from 'electron';
-import { readFile, writeFile } from 'fs/promises';
+import { readFileSync, writeFileSync } from 'fs';
 import path from 'path';
 import StormDB from 'stormdb';
 import { IBookmark, IVisitHistory } from '../../types/browsing';
@@ -120,7 +120,7 @@ export class Database {
       await axios({
         url: faviconUrl,
       }).then((x) =>
-        writeFile(path.resolve(userDataPath, 'favicon', fname), x.data)
+        writeFileSync(path.resolve(userDataPath, 'favicon', fname), x.data)
       );
       return fname;
     } catch {
@@ -132,7 +132,7 @@ export class Database {
     hexId: string
   ): Promise<Buffer | null> {
     try {
-      return await readFile(path.resolve(userDataPath, 'favicon', hexId));
+      return readFileSync(path.resolve(userDataPath, 'favicon', hexId));
     } catch {
       return null;
     }
