@@ -3,6 +3,7 @@ import { WebviewTag } from 'electron';
 import { IBrowsingState } from '../types/reducers';
 import { initialTab } from '../constants/browsing';
 import { loadPhishingSiteCheck } from '../actions/browsing';
+import { ITab } from '../../types/browsing';
 
 const initialState: IBrowsingState = {
   tabs: [],
@@ -47,18 +48,8 @@ export const browsingSlice = createSlice({
     },
     updateTab: (
       state,
-      {
-        payload: { id: tabId, ...data },
-      }: PayloadAction<{
-        id: string;
-        url?: string;
-        favicon?: string;
-        title?: string;
-        canGoBack?: boolean;
-        canGoForward?: boolean;
-      }>
+      { payload: { id: tabId, ...data } }: PayloadAction<Partial<ITab>>
     ) => {
-      console.log('payload', data);
       const newTabs = state.tabs;
       state.tabs.forEach(({ id, ...tab }, i): boolean => {
         if (id !== tabId) return true;
@@ -71,14 +62,17 @@ export const browsingSlice = createSlice({
       state.webviewTable = { ...state.webviewTable, [state.currentTab]: url };
     },
     goBack: (state) => {
+      console.log('webview goBack!');
       const webview: WebviewTag | null = document?.querySelector(
-        `#webview_${state.currentTab}`
+        `#custom_webview_${state.currentTab}`
       );
+      console.log(webview);
       webview?.goBack();
     },
     goForward: (state) => {
+      console.log('webview goForward!');
       const webview: WebviewTag | null = document?.querySelector(
-        `#webview_${state.currentTab}`
+        `#custom_webview_${state.currentTab}`
       );
       webview?.goForward();
     },

@@ -105,6 +105,7 @@ const Controller: React.FC = () => {
         <Link to="/setting">
           <MdOutlineWidgets className={styles.button} />
         </Link>
+        <MdOutlineWidgets className={styles.button} />
       </div>
     </div>
   );

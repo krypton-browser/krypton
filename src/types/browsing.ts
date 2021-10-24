@@ -7,6 +7,7 @@ export interface ITab {
   favicon: string;
   canGoBack: boolean;
   canGoForward: boolean;
+  isDefault: boolean;
 }
 
 export interface IBookmark {
@@ -17,7 +18,7 @@ export interface IBookmark {
 
 export interface IVisitHistory extends IBookmark {
   datetime: string;
-  faviconPath: string; // SaveVisitHistoryFavicon 함수의 반환값
+  faviconPath: string;
 }
 
 export interface ISearchHistory {
