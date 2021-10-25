@@ -6,7 +6,7 @@
 import React, { useState } from 'react';
 import { MdArrowBack, MdArrowForward } from 'react-icons/md';
 import classNames from 'classnames';
-import { Link } from 'react-router-dom';
+import { Link, RouteComponentProps } from 'react-router-dom';
 import styles from '../styles/setting.page.css';
 import duckduckgoIcon from '../../../assets/images/duckduckgo.svg';
 import googleIcon from '../../../assets/images/google.svg';
@@ -14,29 +14,26 @@ import { SubLayout } from '../components/Layout';
 
 const searchEngines = { duckduckgo: duckduckgoIcon, google: googleIcon };
 
-interface Props {
-  close: () => void;
-}
-
-const Setting: React.FC<Props> = ({ close }) => {
+const Setting: React.FC<RouteComponentProps> = ({ history }) => {
   const [searchEngine, setSearchEngine] = useState<string>('google');
 
   const handleClickSearchEngineButton = (
     e: React.MouseEvent<HTMLImageElement>
   ) => {
     const image = e.target as HTMLImageElement;
-    if (image) {
-      setSearchEngine(image.alt);
-    }
+    if (image) setSearchEngine(image.alt);
   };
+
+  const close = () => history.goBack();
 
   return (
     <SubLayout>
       <div className={styles.background}>
-        {/* eslint-disable-next-line jsx-a11y/no-static-element-interactions */}
-        <div className={styles.closeButton} onClick={close}>
-          <MdArrowBack className={styles.icon} />
-          <p>뒤로 가기</p>
+        <div className={styles.close_button_wrapper}>
+          <button type="button" className={styles.close_button} onClick={close}>
+            <MdArrowBack className={styles.icon} />
+            <p className={styles.text}>뒤로 가기</p>
+          </button>
         </div>
         <div className={styles.panel}>
           <h3 className={styles.title}>검색 엔진 설정</h3>
@@ -53,7 +50,6 @@ const Setting: React.FC<Props> = ({ close }) => {
                   type="button"
                   className={styles.search_engine_item_button}
                 >
-                  {/* eslint-disable-next-line jsx-a11y/no-noninteractive-element-interactions */}
                   <img
                     onClick={handleClickSearchEngineButton}
                     className={styles.search_engine_image}

@@ -40,7 +40,6 @@ export const authSlice = createSlice({
       })
       .addCase(login.fulfilled, (state, { payload }) => {
         state.loginDone = payload === 'success';
-        console.log(payload);
         state.loginLoading = false;
       })
       .addCase(login.rejected, (state, { payload }) => {

@@ -1,6 +1,6 @@
 .background {
   width: 100%;
-  padding: 80px 10px 80px 0;
+  padding: 60px 10px 80px 0;
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -8,17 +8,25 @@
   text-align: center;
 }
 
-.closeButton {
-  position: absolute;
-  top: 60px;
-  left: 20px;
+.close_button_wrapper {
+  width: 75%;
+  text-align: left;
+  margin: 0 0 35px;
+}
+
+.close_button {
   display: flex;
   align-items: center;
+  background: none;
+  border: none;
   cursor: pointer;
 }
-.closeButton .icon {
+.close_button .icon {
   font-size: 20px;
   margin: 0 10px 0 0;
+}
+.close_button .text {
+  font-size: 16px;
 }
 
 .panel {

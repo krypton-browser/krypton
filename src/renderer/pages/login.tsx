@@ -23,10 +23,8 @@ const Login = ({ history }: HistoryProps) => {
   };
 
   useEffect(() => {
-    if (isAction) {
-      if (loginDone) history.push('/');
-      if (loginError) alert('비밀번호가 올바르지 않습니다.');
-    }
+    if (loginDone) history.push('/');
+    if (isAction && loginError) alert('비밀번호가 올바르지 않습니다.');
   }, [history, isAction, loginDone, loginError]);
 
   return (

@@ -23,5 +23,6 @@ export const initialHistory = (): IVisitHistory => ({
   id: v4(),
   url: '',
   title: '',
+  faviconPath: '',
   datetime: new Date().toString(),
 });
