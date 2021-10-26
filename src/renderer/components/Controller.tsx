@@ -6,6 +6,7 @@ import {
   MdRefresh,
   MdOutlineStarOutline,
   MdOutlineWidgets,
+  MdOutlineHttps,
 } from 'react-icons/md';
 import classNames from 'classnames';
 import { Link } from 'react-router-dom';
@@ -93,6 +94,7 @@ const Controller: React.FC = () => {
         onSubmit={handleSubmitURLTextBox}
         className={styles.input_wrapper}
       >
+        <MdOutlineHttps className={styles.icon} />
         <input
           type="text"
           className={styles.url_text_box}

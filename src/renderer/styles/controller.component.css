@@ -11,6 +11,21 @@
 .input_wrapper {
   width: 100%;
   height: 100%;
+  padding: 0 0 0 8px;
+  display: flex;
+  align-items: center;
+  border-radius: 5px;
+  background: #f3f3f3;
+}
+.input_wrapper:hover,
+.url_text_box:focus + .input_wrapper {
+  background: #ebebeb;
+}
+
+.input_wrapper .icon {
+  color: #bebebe;
+  font-size: 19px;
+  margin: 0 1px 0 0;
 }
 
 .url_text_box {
@@ -22,13 +37,10 @@
   padding: 0 0 0 6px;
   letter-spacing: 0.4px;
   transition: 0.3s;
+  background: none;
 }
 .url_text_box:focus {
   outline: none;
-}
-.url_text_box:focus,
-.url_text_box:hover {
-  background: #f1f2f3;
 }
 
 .button_wrapper {
