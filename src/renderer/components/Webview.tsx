@@ -24,37 +24,46 @@ const Webview = ({ id, url }: WebviewProps) => {
   const { currentTab } = useAppSelector((state) => state.browsing);
 
   const goForward = () => {
+    alert('go forward!');
     const webview: any = webviewRef?.current;
-    if (webview.canGoForward) {
+    if (webview?.canGoForward) {
       setIsDefault(false);
       webview.goForward();
     }
   };
 
   const goBack = () => {
+    alert('go back!');
     const webview: any = webviewRef?.current;
     webview.goBack();
-    if (!webview.canGoBack) {
+    if (webview.getURL() === '') {
       setIsDefault(true);
     }
+  };
+
+  const reload = () => {
+    const webview: any = webviewRef?.current;
+    if (webview) webview.reload();
   };
 
   useEffect(() => {
     const webview: any = webviewRef?.current;
     updateTab({
       id,
-      url: '',
       canGoBack: !isDefault,
       canGoForward: webview.canGoForward,
       isDefault,
     });
   }, [isDefault]);
 
+  useEffect(() => setIsDefault(url === ''), [url]);
+
   useEffect(() => {
     const customWebview: any = customWebviewRef?.current;
     if (customWebview) {
       customWebview.goForward = goForward;
       customWebview.goBack = goBack;
+      customWebview.reload = reload;
     }
     const webview: any = webviewRef?.current;
     if (webview) {
@@ -65,6 +74,7 @@ const Webview = ({ id, url }: WebviewProps) => {
             url: willURL,
             canGoBack: webview.canGoBack(),
             canGoForward: webview.canGoForward(),
+            isDefault,
           })
         );
         dispatch(
@@ -90,8 +100,6 @@ const Webview = ({ id, url }: WebviewProps) => {
             updateTab({
               id,
               title: explicitSet ? title : webview.getURL(),
-              canGoBack: webview.canGoBack(),
-              canGoForward: webview.canGoForward(),
             })
           );
         }
@@ -112,7 +120,7 @@ const Webview = ({ id, url }: WebviewProps) => {
         )}
         src={url}
       />
-      {url === '' && <Default id={id} />}
+      {isDefault && <Default id={id} />}
     </div>
   );
 };

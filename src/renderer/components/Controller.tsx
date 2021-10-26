@@ -31,6 +31,7 @@ const Controller: React.FC = () => {
     (e) => setUrlText(e.target.value),
     []
   );
+
   const handleSubmitURLTextBox = useCallback(
     (e) => {
       e.preventDefault();
@@ -41,9 +42,13 @@ const Controller: React.FC = () => {
     },
     [dispatch, urlText]
   );
+
   const handleClickGoBack = () => dispatch(goBack());
+
   const handleClickGoForward = () => dispatch(goForward());
+
   const handleClickReload = () => dispatch(reload());
+
   const handleAddBookmark = () => {
     const { title, url } = selectTab({ id: currentTab, tabs });
     dispatch(addBookmarks({ id: v4(), title, url }));

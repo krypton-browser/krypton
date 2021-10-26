@@ -62,15 +62,12 @@ export const browsingSlice = createSlice({
       state.webviewTable = { ...state.webviewTable, [state.currentTab]: url };
     },
     goBack: (state) => {
-      console.log('webview goBack!');
       const webview: WebviewTag | null = document?.querySelector(
         `#custom_webview_${state.currentTab}`
       );
-      console.log(webview);
       webview?.goBack();
     },
     goForward: (state) => {
-      console.log('webview goForward!');
       const webview: WebviewTag | null = document?.querySelector(
         `#custom_webview_${state.currentTab}`
       );
@@ -78,7 +75,7 @@ export const browsingSlice = createSlice({
     },
     reload: (state) => {
       const webview: WebviewTag | null = document?.querySelector(
-        `#webview_${state.currentTab}`
+        `#custom_webview_${state.currentTab}`
       );
       webview?.reload();
     },
