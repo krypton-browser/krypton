@@ -40,7 +40,7 @@ $ yarn build:renderer
 
 ## Docs
 
-See our [docs and guides here](https://github.com/krypton-browser/krypton/wiki).
+See our [docs and guides here](https://krypton-browser.github.io/).
 
 <br/>
 
