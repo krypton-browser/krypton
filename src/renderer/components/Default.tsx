@@ -2,7 +2,6 @@ import React, { useCallback, useState } from 'react';
 import { Link } from 'react-router-dom';
 import classNames from 'classnames';
 import styles from '../styles/default.page.css';
-
 import duckduckgoIcon from '../../../assets/images/duckduckgo_normal.svg';
 import searchIcon from '../../../assets/images/search.svg';
 import { useAppDispatch, useAppSelector } from '../configureStore';

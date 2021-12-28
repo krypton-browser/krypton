@@ -1,13 +1,11 @@
 /* eslint-disable  @typescript-eslint/no-explicit-any */
 
 import React, { useEffect, useRef, useState } from 'react';
-import classNames from 'classnames';
 import { useAppDispatch, useAppSelector } from '../configureStore';
 import { browsingSlice } from '../reducers/browsing';
 import styles from '../styles/webview.component.css';
 import { addHistory } from '../actions/data';
 import { defaultFavicon, initialHistory } from '../constants/browsing';
-import Default from './Default';
 
 const { updateTab } = browsingSlice.actions;
 
@@ -16,7 +14,7 @@ type WebviewProps = {
   readonly url: string;
 };
 
-const Webview = ({ id, url }: WebviewProps) => {
+const Webview: React.FC<WebviewProps> = ({ id, url }) => {
   const [isDefault, setIsDefault] = useState<boolean>(true);
   const dispatch = useAppDispatch();
   const customWebviewRef = useRef(null);
@@ -24,7 +22,6 @@ const Webview = ({ id, url }: WebviewProps) => {
   const { currentTab } = useAppSelector((state) => state.browsing);
 
   const goForward = () => {
-    alert('go forward!');
     const webview: any = webviewRef?.current;
     if (webview?.canGoForward) {
       setIsDefault(false);
@@ -33,7 +30,6 @@ const Webview = ({ id, url }: WebviewProps) => {
   };
 
   const goBack = () => {
-    alert('go back!');
     const webview: any = webviewRef?.current;
     webview.goBack();
     if (webview.getURL() === '') {
@@ -108,19 +104,23 @@ const Webview = ({ id, url }: WebviewProps) => {
   }, []);
 
   return (
-    <div id={`custom_webview_${id}`} ref={customWebviewRef}>
+    <div
+      id={`custom_webview_${id}`}
+      ref={customWebviewRef}
+      className={id !== currentTab ? styles.hide : ''}
+    >
       <webview
         id={`webview_${id}`}
         ref={webviewRef}
         allowFullScreen={true as boolean}
         allowpopups={true as boolean}
-        className={classNames(
-          styles.webview,
-          id !== currentTab || isDefault ? styles.hide : ''
-        )}
-        src={url}
+        className={styles.webview}
+        src={
+          isDefault
+            ? `${__dirname}/../assets/pages/default/index.html?search_engine=duckduckgo`
+            : url
+        }
       />
-      {isDefault && <Default id={id} />}
     </div>
   );
 };

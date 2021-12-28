@@ -9773,6 +9773,11 @@ rc@^1.2.7, rc@^1.2.8:
     minimist "^1.2.0"
     strip-json-comments "~2.0.1"
 
+react-browser-tabs@^1.0.13:
+  version "1.0.13"
+  resolved "https://registry.yarnpkg.com/react-browser-tabs/-/react-browser-tabs-1.0.13.tgz#c0b92cee26d5863f56be1d88753d00a67d7f978b"
+  integrity sha512-IqczDDIPMO9m//gco7BNe7LL5nHNi1JB38cRzIGcOY+wPupWo+BWbx60sk48qFQ3I9bEwONpcCEQknr9I1M91A==
+
 react-dom@^17.0.1:
   version "17.0.2"
   resolved "https://registry.yarnpkg.com/react-dom/-/react-dom-17.0.2.tgz#ecffb6845e3ad8dbfcdc498f0d0a939736502c23"
