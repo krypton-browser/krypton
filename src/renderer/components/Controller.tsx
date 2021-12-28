@@ -76,14 +76,14 @@ const Controller: React.FC = () => {
         <MdArrowBack
           className={classNames(
             styles.button,
-            canGoForward ? styles.enabled : styles.disabled
+            canGoBack ? styles.enabled : styles.disabled
           )}
           onClick={handleClickGoBack}
         />
         <MdArrowForward
           className={classNames(
             styles.button,
-            canGoBack ? styles.enabled : styles.disabled
+            canGoForward ? styles.enabled : styles.disabled
           )}
           onClick={handleClickGoForward}
         />

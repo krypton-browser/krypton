@@ -1,6 +1,6 @@
 /* eslint-disable  @typescript-eslint/no-explicit-any */
 
-import React, { useEffect, useRef, useState } from 'react';
+import React, { useEffect, useRef } from 'react';
 import { useAppDispatch, useAppSelector } from '../configureStore';
 import { browsingSlice } from '../reducers/browsing';
 import styles from '../styles/webview.component.css';
@@ -15,7 +15,6 @@ type WebviewProps = {
 };
 
 const Webview: React.FC<WebviewProps> = ({ id, url }) => {
-  const [isDefault, setIsDefault] = useState<boolean>(true);
   const dispatch = useAppDispatch();
   const customWebviewRef = useRef(null);
   const webviewRef = useRef(null);
@@ -23,18 +22,12 @@ const Webview: React.FC<WebviewProps> = ({ id, url }) => {
 
   const goForward = () => {
     const webview: any = webviewRef?.current;
-    if (webview?.canGoForward) {
-      setIsDefault(false);
-      webview.goForward();
-    }
+    if (webview) webview.goForward();
   };
 
   const goBack = () => {
     const webview: any = webviewRef?.current;
-    webview.goBack();
-    if (webview.getURL() === '') {
-      setIsDefault(true);
-    }
+    if (webview) webview.goBack();
   };
 
   const reload = () => {
@@ -46,13 +39,10 @@ const Webview: React.FC<WebviewProps> = ({ id, url }) => {
     const webview: any = webviewRef?.current;
     updateTab({
       id,
-      canGoBack: !isDefault,
+      canGoBack: webview.canGoBack,
       canGoForward: webview.canGoForward,
-      isDefault,
     });
-  }, [isDefault]);
-
-  useEffect(() => setIsDefault(url === ''), [url]);
+  }, []);
 
   useEffect(() => {
     const customWebview: any = customWebviewRef?.current;
@@ -70,7 +60,6 @@ const Webview: React.FC<WebviewProps> = ({ id, url }) => {
             url: willURL,
             canGoBack: webview.canGoBack(),
             canGoForward: webview.canGoForward(),
-            isDefault,
           })
         );
         dispatch(
@@ -116,7 +105,7 @@ const Webview: React.FC<WebviewProps> = ({ id, url }) => {
         allowpopups={true as boolean}
         className={styles.webview}
         src={
-          isDefault
+          url === ''
             ? `${__dirname}/../assets/pages/default/index.html?search_engine=duckduckgo`
             : url
         }
