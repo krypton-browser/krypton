@@ -1,11 +1,12 @@
 import React, { ChangeEvent, FormEvent, useEffect, useState } from 'react';
-import styles from '../styles/login.page.css';
+import styles from '../styles/join.page.css';
 import logoNoTitle from '../../../assets/images/logo_no_title.svg';
 import { SubLayout } from '../components/Layout';
 import lockImage from '../../../assets/images/lock.svg';
 import { useAppDispatch, useAppSelector } from '../configureStore';
 import { login } from '../actions/auth';
 import { HistoryProps } from '../types/props';
+import logoTitleImage from '../../../assets/images/logo_title.svg';
 
 const Login = ({ history }: HistoryProps) => {
   const dispatch = useAppDispatch();
@@ -29,27 +30,25 @@ const Login = ({ history }: HistoryProps) => {
 
   return (
     <SubLayout>
-      <form
-        className={styles.login_wrapper}
-        autoComplete="off"
-        onSubmit={handleSubmitPassword}
-      >
+      <form className={styles.join_wrapper} onSubmit={handleSubmitPassword}>
         <div className={styles.logo_wrapper}>
-          <img src={logoNoTitle} className={styles.logo} alt="logo" />
+          <img src={logoNoTitle} className={styles.logo_image} alt="logo" />
+          <img src={logoTitleImage} className={styles.logo_title} alt="title" />
         </div>
-        <div className={styles.top_bar}>
-          <div className={styles.bar_back}>
-            <img src={lockImage} className={styles.lock_image} alt="dat" />
+        <div className={styles.password_form}>
+          <div className={styles.password_box_wrapper}>
+            <img src={lockImage} className={styles.lock_image} alt="lock" />
             <input
               type="password"
               className={styles.password}
               placeholder="비밀번호"
               onChange={handleChangePassword}
+              value={password}
             />
           </div>
         </div>
         <div className={styles.bottom_bar}>
-          <div className={styles.start}>
+          <div className={styles.submit_wrapper}>
             <input
               type="submit"
               className={styles.pass_submit}

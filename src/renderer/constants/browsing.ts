@@ -10,7 +10,6 @@ export const initialTab = (): ITab => ({
   favicon: defaultFavicon,
   canGoBack: false,
   canGoForward: false,
-  isDefault: true,
 });
 
 export const initialBookmark = (): IBookmark => ({
