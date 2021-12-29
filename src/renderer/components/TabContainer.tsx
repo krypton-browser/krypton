@@ -17,11 +17,16 @@ const TabContainer: React.FC = () => {
 
   return (
     <div className={styles.container}>
-      {tabs.map(({ id, url, title, favicon }) => (
-        <Tab key={id} id={id} title={title ?? url} favicon={favicon} />
-      ))}
-      {/* eslint-disable-next-line react/button-has-type */}
-      <button className={styles.add_tab_button} onClick={handleAddTab}>
+      <div className={styles.tabs_container}>
+        {tabs.map(({ id, url, title, favicon }) => (
+          <Tab key={id} id={id} title={title ?? url} favicon={favicon} />
+        ))}
+      </div>
+      <button
+        type="button"
+        className={styles.add_tab_button}
+        onClick={handleAddTab}
+      >
         <img src={addTabIcon} alt="add tab" className={styles.icon} />
       </button>
     </div>

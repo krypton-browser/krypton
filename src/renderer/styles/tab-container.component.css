@@ -1,33 +1,36 @@
 .container {
-  width: auto;
+  max-width: 100%;
   z-index: 1000;
   display: flex;
   align-items: center;
 }
 
-.frame_button_wrapper {
+.tabs_container {
   display: flex;
+  height: 100%;
+  max-width: 90%;
 }
 
 .add_tab_button {
-  margin: 0 0 0 8px;
-  height: calc(100% - 10px);
-  padding: 0 6px;
-  border: none;
+  width: 25px;
+  height: 25px;
   display: flex;
   justify-content: center;
   align-items: center;
+  border: none;
   background: none;
   -webkit-user-select: auto;
   user-select: auto;
   -webkit-app-region: no-drag;
-  transition: 0.5s;
   border-radius: 100%;
+  transition: 0.3s;
+  margin-left: auto;
 }
 .add_tab_button:hover {
-  background: rgba(0, 0, 0, 0.1);
+  background: rgba(0, 0, 0, 0.05);
 }
 
 .add_tab_button .icon {
-  width: 12px;
+  width: 12px !important;
+  height: 12px !important;
 }
