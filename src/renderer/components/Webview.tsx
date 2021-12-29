@@ -6,6 +6,7 @@ import { browsingSlice } from '../reducers/browsing';
 import styles from '../styles/webview.component.css';
 import { addHistory } from '../actions/data';
 import { defaultFavicon, initialHistory } from '../constants/browsing';
+import { DEFAULT_PAGE_URL } from '../constants/url';
 
 const { updateTab } = browsingSlice.actions;
 
@@ -104,11 +105,7 @@ const Webview: React.FC<WebviewProps> = ({ id, url }) => {
         allowFullScreen={true as boolean}
         allowpopups={true as boolean}
         className={styles.webview}
-        src={
-          url === ''
-            ? `${__dirname}/../assets/pages/default/index.html?search_engine=duckduckgo`
-            : url
-        }
+        src={url === '' ? `${DEFAULT_PAGE_URL}?search_engine=duckduckgo` : url}
       />
     </div>
   );

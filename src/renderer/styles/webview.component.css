@@ -1,12 +1,16 @@
 .webview {
-  width: 100%;
-  height: calc(100vh - 75px);
+  width: calc(100vw - 60px);
+  height: calc(100vh - 77.5px);
   background: #fff;
-  z-index: 9999;
+  z-index: 9999 !important;
   display: inline-flex;
+  position: absolute;
+  bottom: 0;
+  right: 0;
 }
 
 .hide {
+  display: none;
   flex: 0 1;
   width: 0;
   height: 0;

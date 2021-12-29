@@ -1,16 +1,16 @@
 .sidebar {
   width: 60px;
   margin: 1px 0 0;
-  height: calc(100vh - 78px);
+  height: calc(100vh - 80px);
   display: flex;
   align-items: center;
   justify-content: space-between;
   flex-direction: column;
   background-color: #f3f3f3;
-  z-index: 1000;
   box-shadow: 0 1px 3px 0 rgba(0, 0, 0, 0.16);
   padding: 70px 0 0;
   box-sizing: border-box;
+  z-index: 1000;
 }
 
 .latest_data_wrapper {
