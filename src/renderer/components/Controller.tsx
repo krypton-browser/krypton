@@ -1,4 +1,4 @@
-import React, { useCallback, useEffect, useState } from 'react';
+import React, { useCallback, useEffect, useRef, useState } from 'react';
 import { v4 } from 'uuid';
 import {
   MdArrowBack,
@@ -16,10 +16,12 @@ import { browsingSlice } from '../reducers/browsing';
 import { useAppDispatch, useAppSelector } from '../configureStore';
 import { addBookmarks } from '../actions/data';
 import { selectTab } from '../utils/findTab';
+import { DEFAULT_PAGE_URL } from '../constants/url';
 
 const { go, goBack, goForward, reload } = browsingSlice.actions;
 
 const Controller: React.FC = () => {
+  const inputURLRef = useRef(null);
   const dispatch = useAppDispatch();
   const { tabs, currentTab, webviewTable } = useAppSelector(
     (state) => state.browsing
@@ -36,6 +38,7 @@ const Controller: React.FC = () => {
   const handleSubmitURLTextBox = useCallback(
     (e) => {
       e.preventDefault();
+      (inputURLRef?.current as any).blur();
       const url = isUrl(urlText)
         ? urlText
         : `https://duckduckgo.com/?q=${encodeURI(urlText)}`;
@@ -67,7 +70,11 @@ const Controller: React.FC = () => {
     setCanGoBack(CanGoBack);
     setCanGoForward(CanGoForward);
     if (webviewTable[currentTab] === '') setUrlText('');
-    else setUrlText(url);
+    else {
+      setUrlText(
+        new URL(url).pathname === new URL(DEFAULT_PAGE_URL).pathname ? '' : url
+      );
+    }
   }, [currentTab, tabs]);
 
   return (
@@ -96,11 +103,11 @@ const Controller: React.FC = () => {
       >
         <MdOutlineHttps className={styles.icon} />
         <input
+          ref={inputURLRef}
           type="text"
           className={styles.url_text_box}
           placeholder="검색어 또는 URL 입력"
           onChange={handleChangeURLTextBox}
-          onSubmit={handleSubmitURLTextBox}
           value={urlText}
         />
       </form>

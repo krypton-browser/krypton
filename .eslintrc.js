@@ -7,6 +7,7 @@ module.exports = {
     'no-console': 'off',
     'no-alert': 'off',
     'react-hooks/exhaustive-deps': 'off',
+    '@typescript-eslint/no-explicit-any': 'off',
   },
   parserOptions: {
     ecmaVersion: 2020,

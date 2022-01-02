@@ -5,7 +5,7 @@ import { useAppDispatch, useAppSelector } from '../configureStore';
 import { browsingSlice } from '../reducers/browsing';
 import styles from '../styles/webview.component.css';
 import { addHistory } from '../actions/data';
-import { defaultFavicon, initialHistory } from '../constants/browsing';
+import { DEFAULT_FAVICON_URI, initialHistory } from '../constants/browsing';
 import { DEFAULT_PAGE_URL } from '../constants/url';
 
 const { updateTab } = browsingSlice.actions;
@@ -75,7 +75,7 @@ const Webview: React.FC<WebviewProps> = ({ id, url }) => {
         dispatch(
           updateTab({
             id,
-            favicon: favicons.length ? favicons[0] : defaultFavicon,
+            favicon: favicons.length ? favicons[0] : DEFAULT_FAVICON_URI,
           })
         );
       });
