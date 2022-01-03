@@ -37,15 +37,6 @@ const Webview: React.FC<WebviewProps> = ({ id, url }) => {
   };
 
   useEffect(() => {
-    const webview: any = webviewRef?.current;
-    updateTab({
-      id,
-      canGoBack: webview.canGoBack,
-      canGoForward: webview.canGoForward,
-    });
-  }, []);
-
-  useEffect(() => {
     const customWebview: any = customWebviewRef?.current;
     if (customWebview) {
       customWebview.goForward = goForward;
@@ -93,6 +84,13 @@ const Webview: React.FC<WebviewProps> = ({ id, url }) => {
     }
   }, []);
 
+  useEffect(() => {
+    const webview: any = webviewRef?.current;
+    if (webview?.src !== url) {
+      webview.setAttribute('src', url);
+    }
+  }, [url]);
+
   return (
     <div
       id={`custom_webview_${id}`}
@@ -105,7 +103,7 @@ const Webview: React.FC<WebviewProps> = ({ id, url }) => {
         allowFullScreen={true as boolean}
         allowpopups={true as boolean}
         className={styles.webview}
-        src={url === '' ? `${DEFAULT_PAGE_URL}?search_engine=duckduckgo` : url}
+        src={`${DEFAULT_PAGE_URL}?search_engine=duckduckgo`}
       />
     </div>
   );
