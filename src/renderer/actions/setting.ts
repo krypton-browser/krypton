@@ -16,5 +16,5 @@ export const setSetting = createAsyncThunk(
 
 export const loadSetting = createAsyncThunk(
   'setting/LOAD_SETTING',
-  async (): Promise<ISettings> => ipcSender(setting.load)
+  async (): Promise<ISettings> => await ipcSender(setting.load)
 );

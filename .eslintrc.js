@@ -8,6 +8,8 @@ module.exports = {
     'no-alert': 'off',
     'react-hooks/exhaustive-deps': 'off',
     '@typescript-eslint/no-explicit-any': 'off',
+    'no-return-await': 'off',
+    '@typescript-eslint/return-await': 'off',
   },
   parserOptions: {
     ecmaVersion: 2020,

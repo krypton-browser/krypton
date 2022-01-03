@@ -3,7 +3,7 @@
 /* eslint-disable jsx-a11y/no-noninteractive-element-interactions */
 /* eslint-disable jsx-a11y/no-static-element-interactions */
 
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { MdArrowBack, MdArrowForward } from 'react-icons/md';
 import classNames from 'classnames';
 import { Link, RouteComponentProps } from 'react-router-dom';
@@ -11,10 +11,12 @@ import styles from '../styles/setting.page.css';
 import duckduckgoIcon from '../../../assets/images/duckduckgo.svg';
 import googleIcon from '../../../assets/images/google.svg';
 import { SubLayout } from '../components/Layout';
+import { useAppSelector } from '../configureStore';
 
-const searchEngines = { duckduckgo: duckduckgoIcon, google: googleIcon };
+const searchEngines = { DuckDuckGo: duckduckgoIcon, Google: googleIcon };
 
 const Setting: React.FC<RouteComponentProps> = ({ history }) => {
+  const { setting } = useAppSelector((state) => state.setting);
   const [searchEngine, setSearchEngine] = useState<string>('google');
 
   const handleClickSearchEngineButton = (
@@ -25,6 +27,12 @@ const Setting: React.FC<RouteComponentProps> = ({ history }) => {
   };
 
   const close = () => history.goBack();
+
+  useEffect(() => {
+    if (setting?.SearchEngine) {
+      setSearchEngine(setting?.SearchEngine.name);
+    }
+  }, [setting]);
 
   return (
     <SubLayout>

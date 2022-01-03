@@ -86,9 +86,7 @@ const Webview: React.FC<WebviewProps> = ({ id, url }) => {
 
   useEffect(() => {
     const webview: any = webviewRef?.current;
-    if (webview?.src !== url) {
-      webview.setAttribute('src', url);
-    }
+    if (webview?.src !== url) webview.setAttribute('src', url);
   }, [url]);
 
   return (
