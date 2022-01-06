@@ -24,11 +24,19 @@ export class Searcher {
     this.keyword = keyword;
     this.urlConstructor = urlConstructor;
   }
+
+  toObject(): ISearcher {
+    return {
+      name: this.name,
+      keyword: this.keyword,
+      urlConstructor: this.urlConstructor
+    };
+  }
 }
 
 export interface DefaultSearchersType {
-  DuckDuckGo: Searcher;
-  Google: Searcher;
+  DuckDuckGo: ISearcher;
+  Google: ISearcher;
 }
 
 export const DefaultSearchers: DefaultSearchersType = {
@@ -38,8 +46,8 @@ export const DefaultSearchers: DefaultSearchersType = {
     (query: string) => {
       return `https://duckduckgo.com/?q=${query}`;
     }
-  ),
+  ).toObject(),
   Google: new Searcher('Google', ['google.com'], (query: string) => {
     return `https://www.google.com/search?q=${query}`;
-  }),
+  }).toObject(),
 };
