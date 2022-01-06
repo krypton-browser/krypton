@@ -2,6 +2,12 @@ export const defaultSearchEngine = 'https://duckduckgo.com/';
 
 export type UrlConstructor = (query: string) => string;
 
+export interface ISearcher {
+  name: string;
+  keyword: Array<string>;
+  urlConstructor: UrlConstructor;
+}
+
 export class Searcher {
   name: string;
 
